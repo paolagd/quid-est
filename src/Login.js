@@ -1,16 +1,25 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { loginWithEmail } from "./firebase";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, loginWithEmail } from "./firebase";
 import "./Login.css";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
+  const [user, loading, error] = useAuthState(auth);
 
   const loginUser = () => {
     loginWithEmail(email, password);
     setEmail("");
     setPassword("");
   }
+
+  useEffect(() => {
+    if (loading) return;
+    if (user) history.replace('/')
+  });
+
   return (
     <div className="login">
       <div className="login__container">
