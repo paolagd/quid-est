@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Reset.css";
+import { resetPassword } from './firebase';
+
 function Reset() {
   const [email, setEmail] = useState("");
+
+  const resetUserPassword = () => {
+    resetPassword();
+    setEmail("");
+  }
   return (
     <div className="reset">
       <div className="reset__container">
@@ -15,6 +22,7 @@ function Reset() {
         />
         <button
           className="reset__btn"
+          onClick={resetUserPassword}
         >
           Send password reset email
         </button>
@@ -22,7 +30,7 @@ function Reset() {
           Don't have an account? <Link to="/register">Register</Link> now.
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 export default Reset;

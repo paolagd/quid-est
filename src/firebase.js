@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -70,6 +71,14 @@ const loginWithGoogle = () => {
   console.log("TODO: this functionality is not yet implemented");
 }
 
+const resetPassword = (email) => {
+  try {
+    console.log("TODO: this functionality is not yet implemented");
+  } catch (error) {
+    console.log("error while sending password reset email: ", error.message);
+  }
+}
+
 export {
   auth,
   db,
@@ -77,4 +86,5 @@ export {
   loginWithEmail,
   logout,
   loginWithGoogle,
+  resetPassword,
 }
