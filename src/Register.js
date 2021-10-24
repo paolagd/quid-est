@@ -10,6 +10,9 @@ function Register() {
   const registerUser = () => {
     if (!name) alert("Please enter name");
     register(name, email, password);
+    setName("");
+    setEmail("");
+    setPassword("");
   };
   return (
     <div className="register">
