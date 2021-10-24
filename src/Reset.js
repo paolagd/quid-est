@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Reset.css";
 function Reset() {
   const [email, setEmail] = useState("");
-  const history = useHistory();
   return (
     <div className="reset">
       <div className="reset__container">
