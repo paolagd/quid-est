@@ -43,7 +43,7 @@ const register = async (name, email, password) => {
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (error) {
-    console.log(error.message);
+    console.log("error while adding document for new user: ", error.message);
   }
 }
 
@@ -53,15 +53,16 @@ const loginWithEmail = async (email, password) => {
     const user = userCredential.user;
     console.log("user logged in: ", user);
   } catch (error) {
-    console.log(error.message);
+    console.log("error during login: ", error.message);
   }
 }
 
 const logout = async () => {
   try {
     await signOut(auth);
+    console.log("user has been logged out");
   } catch (error) {
-    console.log("error while logging out: ", error.message);
+    console.log("error during logout: ", error.message);
   }
 }
 

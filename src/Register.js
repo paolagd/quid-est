@@ -20,8 +20,9 @@ function Register() {
 
   useEffect(() => {
     if (loading) return;
+    if (error) console.log(error);
     if (user) history.replace('/');
-  }, [user, loading]);
+  }, [user, loading, error, history]);
 
   return (
     <div className="register">

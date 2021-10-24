@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuthState } from 'react-firebase-hooks/auth'
 import "./Dashboard.css";
 import { auth, logout } from "./firebase";
 function Dashboard() {
-  const logoutUser = () => {
-    logout();
-  }
-  const [name, setName] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
 
+  const logoutUser = () => {
+    logout();
+  }
+
   useEffect(() => {
     if (loading) return;
+    if (error) console.log(error);
     if (!user) history.replace('/login');
-  }, [user, loading])
+  }, [user, loading, error, history]);
+
   return (
     <div className="dashboard">
       <div className="dashboard__container">
