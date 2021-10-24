@@ -66,10 +66,15 @@ const logout = async () => {
   }
 }
 
+const loginWithGoogle = () => {
+  console.log("TODO: this functionality is not yet implemented");
+}
+
 export {
   auth,
   db,
   register,
   loginWithEmail,
   logout,
+  loginWithGoogle,
 }
