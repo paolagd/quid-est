@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 // TODO: Replace the following with your app's Firebase project configuration
@@ -20,3 +20,17 @@ console.log("app", app.options);
 console.log("db", db);
 console.log("auth", auth);
 
+const register = async (name, email, password) => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    console.log(userCredential);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+export {
+  auth,
+  db,
+  register,
+}
