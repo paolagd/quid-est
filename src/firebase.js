@@ -1,7 +1,14 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { addDoc, collection } from "firebase/firestore";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+} from "firebase/firestore";
 
 
 // TODO: Replace the following with your app's Firebase project configuration
@@ -26,7 +33,7 @@ const register = async (name, email, password) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
-    console.log("user", user);
+    console.log("user registered", user);
     // Add a user document with a generated ID.
     const docRef = await addDoc(collection(db, "users"), {
       uid: user.uid,
@@ -39,8 +46,19 @@ const register = async (name, email, password) => {
   }
 }
 
+const loginWithEmail = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    console.log("user logged in: ", user);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 export {
   auth,
   db,
   register,
+  loginWithEmail,
 }

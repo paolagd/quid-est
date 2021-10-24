@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { loginWithEmail } from "./firebase";
 import "./Login.css";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const loginUser = () => {
+    loginWithEmail(email, password);
+    setEmail("");
+    setPassword("");
+  }
   return (
     <div className="login">
       <div className="login__container">
@@ -24,6 +30,7 @@ function Login() {
         />
         <button
           className="login__btn"
+          onClick={loginUser}
         >
           Login
         </button>
