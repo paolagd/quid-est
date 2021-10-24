@@ -3,6 +3,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -56,9 +57,18 @@ const loginWithEmail = async (email, password) => {
   }
 }
 
+const logout = async () => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.log("error while logging out: ", error.message);
+  }
+}
+
 export {
   auth,
   db,
   register,
   loginWithEmail,
+  logout,
 }
