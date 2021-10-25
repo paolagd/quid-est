@@ -1,6 +1,6 @@
 export default function SideBar() {
   return (
-    <div id="wrapper">
+  
       <nav className="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
         <div className="container-fluid d-flex flex-column p-0">
           <a
@@ -50,7 +50,7 @@ export default function SideBar() {
           </div>
         </div>
       </nav>
-    </div>
+   
   );
 }
  
