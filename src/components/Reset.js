@@ -10,6 +10,7 @@ function Reset() {
     resetPassword();
     setEmail("");
   }
+  
   return (
     <div className="reset">
       <div className="reset__container">
