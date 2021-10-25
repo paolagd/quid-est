@@ -9,7 +9,7 @@ import {
 import {
   getFirestore,
   collection,
-  addDoc,
+  addDoc, setDoc, doc,
 } from "firebase/firestore";
 
 
@@ -37,12 +37,12 @@ const register = async (name, email, password) => {
     const user = userCredential.user;
     console.log("user registered", user);
     // Add a user document with a generated ID.
-    const docRef = await addDoc(collection(db, "users"), {
+    await setDoc(doc(db, "users", user.uid), {
       uid: user.uid,
       name,
       email
     });
-    console.log("Document written with ID: ", docRef.id);
+    console.log("Document written with ID: ", user.uid);
   } catch (error) {
     console.log("error while adding document for new user: ", error.message);
   }
