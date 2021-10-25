@@ -1,3 +1,5 @@
+import SideBarItem from "./SideBarItem";
+
 export default function SideBar() {
   return (
   
@@ -14,32 +16,12 @@ export default function SideBar() {
               <span>Quid-EST</span>
             </div>
           </a>
-          <hr className="sidebar-divider my-0" />
+          <hr className="sidebar-divider my-0" /> 
           <ul className="navbar-nav text-light" id="accordionSidebar">
-            <li className="nav-item">
-              <a className="nav-link" href="index.html">
-                <i className="fas fa-tachometer-alt"></i>
-                <span>What is this?</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="profile.html">
-                <i className="fas fa-user"></i>
-                <span>History</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="table.html">
-                <i className="fas fa-table"></i>
-                <span>Translate</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="login.html">
-                <i className="far fa-user-circle"></i>
-                <span>Quiz me!</span>
-              </a>
-            </li> 
+            <SideBarItem title="What is this?" icon="fa-tachometer-alt"/>
+            <SideBarItem title="History" icon="fa-user"/> 
+            <SideBarItem title="Translate" icon="fa-table"/> 
+            <SideBarItem title="Quiz me!" icon="fa-table"/>  
           </ul>
           <div className="text-center d-none d-md-inline">
             <button
