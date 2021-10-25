@@ -13,6 +13,9 @@ import {
 } from "firebase/firestore";
 import {
   getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
 } from "firebase/storage";
 
 
@@ -85,13 +88,25 @@ const resetPassword = (email) => {
   }
 }
 
+const uploadImage = async (file) => {
+  // create a reference in storage & upload file
+  const storageRef = ref(storage, `images/${file.name}`);
+  await uploadBytes(storageRef, file).then((snapshot) => {
+    console.log('Uploaded a blob or file!');
+  });
+
+  // return a promise with download url
+  return getDownloadURL(ref(storage, `images/${file.name}`));
+}
+
 export {
   auth,
   db,
-  storage,
   register,
   loginWithEmail,
   logout,
   loginWithGoogle,
   resetPassword,
+  storage,
+  uploadImage,
 }
