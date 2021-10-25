@@ -88,15 +88,15 @@ const resetPassword = (email) => {
   }
 }
 
-const uploadImage = async (file) => {
+const uploadImage = async (userID, file) => {
   // create a reference in storage & upload file
-  const storageRef = ref(storage, `images/${file.name}`);
+  const storageRef = ref(storage, `users/${userID}/${file.name}`);
   await uploadBytes(storageRef, file).then((snapshot) => {
     console.log('Uploaded a blob or file!');
   });
 
   // return a promise with download url
-  return getDownloadURL(ref(storage, `images/${file.name}`));
+  return getDownloadURL(ref(storage, `users/${userID}/${file.name}`));
 }
 
 export {

@@ -1,13 +1,23 @@
-import React, { useState } from 'react'
-import { uploadImage } from '../utils/firebase';
+import React, { useState, useEffect } from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { useHistory } from 'react-router-dom';
+import { auth, uploadImage } from '../utils/firebase';
 import './MainImage.css';
 
 function MainImage() {
   const [imageURL, setImageURL] = useState("");
+  const [user, loading, error] = useAuthState(auth);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (loading) return;
+    if (error) console.log(error);
+    if (!user) history.replace('/login');
+  }, [user, loading, error, history]);
 
   const fileChange = async (files) => {
     console.log(files[0].name);
-    const downloadURL = await uploadImage(files[0]);
+    const downloadURL = await uploadImage(user.uid, files[0]);
     console.log(downloadURL);
     setImageURL(downloadURL);
   }
