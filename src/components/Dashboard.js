@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useAuthState } from 'react-firebase-hooks/auth'
-import "./Dashboard.css";
+import { useAuthState } from 'react-firebase-hooks/auth' 
 import { auth, logout } from "../utils/firebase";
 import ImageHolder from "./ImageHolder";
+import SideBar from "./SideBar"
+import "./Dashboard.css";
 
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
@@ -20,6 +21,8 @@ function Dashboard() {
   }, [user, loading, error, history]);
 
   return (
+    <>
+    <SideBar></SideBar>
     <div className="dashboard">
       <div className="dashboard__container">
         Logged in as
@@ -30,6 +33,7 @@ function Dashboard() {
       </div>
       <ImageHolder />
     </div>
+    </>
   );
 }
 export default Dashboard;
