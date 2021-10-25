@@ -5,6 +5,7 @@ import Register from './components/Register';
 import Reset from './components/Reset';
 import Dashboard from './components/Dashboard';
 import './utils/firebase';
+import MainImage from './components/MainImage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/reset" component={Reset} />
+          <Route exact path="/image" component={MainImage} />
         </Switch>
       </Router>
     </div>
