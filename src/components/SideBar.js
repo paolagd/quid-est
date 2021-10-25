@@ -1,4 +1,4 @@
-function SideBar() {
+export default function SideBar() {
   return (
     <div id="wrapper">
       <nav className="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
@@ -11,7 +11,7 @@ function SideBar() {
               <i className="fas fa-laugh-wink"></i>
             </div>
             <div className="sidebar-brand-text mx-3">
-              <span>Brand</span>
+              <span>Quid-EST</span>
             </div>
           </a>
           <hr className="sidebar-divider my-0" />
@@ -19,33 +19,27 @@ function SideBar() {
             <li className="nav-item">
               <a className="nav-link" href="index.html">
                 <i className="fas fa-tachometer-alt"></i>
-                <span>Dashboard</span>
+                <span>What is this?</span>
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="profile.html">
                 <i className="fas fa-user"></i>
-                <span>Profile</span>
+                <span>History</span>
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="table.html">
                 <i className="fas fa-table"></i>
-                <span>Table</span>
+                <span>Translate</span>
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="login.html">
                 <i className="far fa-user-circle"></i>
-                <span>Login</span>
+                <span>Quiz me!</span>
               </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="register.html">
-                <i className="fas fa-user-circle"></i>
-                <span>Register</span>
-              </a>
-            </li>
+            </li> 
           </ul>
           <div className="text-center d-none d-md-inline">
             <button
@@ -59,5 +53,4 @@ function SideBar() {
     </div>
   );
 }
-
-export default SideBar;
+ 
