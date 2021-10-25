@@ -1,8 +1,15 @@
 import React from 'react'
+import './MainImage.css';
 
 function MainImage() {
   return (
-    <h2>Main Image</h2>
+    <div className="wrapper">
+      <h2 className="item">Main Image</h2>
+      <img className="item image"
+        src="placeholder.jpg"
+        alt="image"
+      />
+    </div>
   );
 }
 

@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+.item {
+  max-width: 400px;
+  font-size: 4em;
+  height: auto;
+}
+
