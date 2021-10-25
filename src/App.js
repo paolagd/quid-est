@@ -1,10 +1,10 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Login from './Login';
-import Register from './Register';
-import Reset from './Reset';
-import Dashboard from './Dashboard';
-import './firebase';
+import Login from './components/Login';
+import Register from './components/Register';
+import Reset from './components/Reset';
+import Dashboard from './components/Dashboard';
+import './utils/firebase';
 
 function App() {
   return (

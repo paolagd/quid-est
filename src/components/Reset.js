@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Reset.css";
-import { resetPassword } from './firebase';
+import { resetPassword } from '../utils/firebase';
 
 function Reset() {
   const [email, setEmail] = useState("");
@@ -10,6 +10,7 @@ function Reset() {
     resetPassword();
     setEmail("");
   }
+  
   return (
     <div className="reset">
       <div className="reset__container">
