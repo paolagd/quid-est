@@ -4,10 +4,14 @@ import './MainImage.css';
 function MainImage() {
   return (
     <div className="wrapper">
-      <h2 className="item">Main Image</h2>
-      <img className="item image"
+      <h2>Image</h2>
+      <img className="image"
         src="placeholder.jpg"
         alt="image"
+      />
+      <input className="file-input"
+        type="file"
+        accept=".png .jpg"
       />
     </div>
   );
