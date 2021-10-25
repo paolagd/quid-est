@@ -11,7 +11,7 @@ function Register() {
   const [user, loading, error] = useAuthState(auth);
 
   const registerUser = () => {
-    if (!name) alert("Please enter name");
+    if (!name) alert("Please enter name"); //TODO: 
     register(name, email, password);
     setName("");
     setEmail("");
