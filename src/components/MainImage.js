@@ -1,17 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { uploadImage } from '../utils/firebase';
 import './MainImage.css';
 
 function MainImage() {
+  const [imageURL, setImageURL] = useState("");
 
-  const fileChange = (files) => {
-    console.log(files);
+  const fileChange = async (files) => {
+    console.log(files[0].name);
+    const downloadURL = await uploadImage(files[0]);
+    console.log(downloadURL);
+    setImageURL(downloadURL);
   }
 
   return (
     <div className="wrapper">
       <h2>Image</h2>
       <img className="image"
-        src="placeholder.jpg"
+        src={imageURL || "placeholder.jpg"}
         alt="image"
       />
       <input className="file-input"
