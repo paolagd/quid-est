@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useAuthState } from 'react-firebase-hooks/auth'
 import "./Dashboard.css";
 import { auth, logout } from "../utils/firebase";
+import ImageHolder from "./ImageHolder";
 
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
@@ -27,6 +28,7 @@ function Dashboard() {
           Logout
         </button>
       </div>
+      <ImageHolder />
     </div>
   );
 }
