@@ -23,10 +23,10 @@ function Dashboard() {
 
   return (
     <div id="wrapper">
-      <SideBar></SideBar>
-      <div class="d-flex flex-column" id="content-wrapper">
+      <SideBar/>
+      <div className="d-flex flex-column" id="content-wrapper">
         <div id="content">
-          <TopBar/>
+          <TopBar user={user}/>
         </div>
       </div>
 

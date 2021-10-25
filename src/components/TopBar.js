@@ -1,4 +1,7 @@
-export default function TopBar() {
+export default function TopBar(props) {
+  const { user } = props;
+   
+  console.log(user)
   return (
     <nav className="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
       <div className="container-fluid">
@@ -9,9 +12,8 @@ export default function TopBar() {
         >
           <i className="fas fa-bars"></i>
         </button>
-         
+
         <ul className="navbar-nav flex-nowrap ms-auto">
-          
           {/* notifications section */}
           <li className="nav-item dropdown no-arrow mx-1">
             <div className="nav-item dropdown no-arrow">
@@ -113,11 +115,12 @@ export default function TopBar() {
                 href="/"
               >
                 <span className="d-none d-lg-inline me-2 text-gray-600 small">
-                  User name
+                  { user && user.email}
                 </span>
                 <img
                   className="border rounded-circle img-profile"
                   src="assets/img/avatars/avatar1.jpeg"
+                  alt="profile-img"
                 />
               </a>
               <div className="dropdown-menu shadow dropdown-menu-end animated--grow-in">
@@ -128,7 +131,7 @@ export default function TopBar() {
                 <a className="dropdown-item" href="#">
                   <i className="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>
                   &nbsp;Settings
-                </a> 
+                </a>
                 <div className="dropdown-divider"></div>
                 <a className="dropdown-item" href="#">
                   <i className="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>

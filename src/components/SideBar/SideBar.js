@@ -2,37 +2,34 @@ import SideBarItem from "./SideBarItem";
 
 export default function SideBar() {
   return (
-  
-      <nav className="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-        <div className="container-fluid d-flex flex-column p-0">
-          <a
-            className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
-            href="/"
-          >
-            <div className="sidebar-brand-icon rotate-n-15">
-              <i className="fas fa-laugh-wink"></i>
-            </div>
-            <div className="sidebar-brand-text mx-3">
-              <span>Quid-EST</span>
-            </div>
-          </a>
-          <hr className="sidebar-divider my-0" /> 
-          <ul className="navbar-nav text-light" id="accordionSidebar">
-            <SideBarItem title="What is this?" icon="fa-tachometer-alt"/>
-            <SideBarItem title="History" icon="fa-user"/> 
-            <SideBarItem title="Translate" icon="fa-table"/> 
-            <SideBarItem title="Quiz me!" icon="fa-table"/>  
-          </ul>
-          <div className="text-center d-none d-md-inline">
-            <button
-              className="btn rounded-circle border-0"
-              id="sidebarToggle"
-              type="button"
-            ></button>
+    <nav className="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+      <div className="container-fluid d-flex flex-column p-0">
+        <a
+          className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+          href="#"
+        >
+          <div className="sidebar-brand-icon rotate-n-15">
+            <i className="fas fa-laugh-wink"></i>
           </div>
+          <div className="sidebar-brand-text mx-3">
+            <span>Quid-EST</span>
+          </div>
+        </a>
+        <hr className="sidebar-divider my-0" />
+        <ul className="navbar-nav text-light" id="accordionSidebar">
+          <SideBarItem title="What is this?" icon="fa-images" />
+          <SideBarItem title="History" icon="fa-history" />
+          <SideBarItem title="Translate" icon="fa-language" />
+          <SideBarItem title="Quiz me!" icon="fa-diagnoses" />
+        </ul>
+        <div className="text-center d-none d-md-inline">
+          <button
+            className="btn rounded-circle border-0"
+            id="sidebarToggle"
+            type="button"
+          ></button>
         </div>
-      </nav>
-   
+      </div>
+    </nav>
   );
 }
- 
