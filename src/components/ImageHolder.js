@@ -42,8 +42,11 @@ function ImageHolder() {
     }
   }
 
-  useEffect(async () => {
-    
+  useEffect(() => {
+    const loadModel = async () => {
+      const loadedModel = await mobilenet.load();
+      setModel(loadedModel);
+    }
     loadModel();
 
   },[])
