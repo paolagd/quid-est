@@ -9,7 +9,7 @@ import MainImage from './components/MainImage';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App"> 
       <Router>
         <Switch>
           <Route exact path="/" component={Dashboard} />
