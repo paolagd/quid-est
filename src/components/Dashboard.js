@@ -26,7 +26,7 @@ function Dashboard() {
       <SideBar/>
       <div className="d-flex flex-column" id="content-wrapper">
         <div id="content">
-          <TopBar user={user}/>
+          <TopBar user={user} logout={logoutUser} />
         </div>
       </div>
 
