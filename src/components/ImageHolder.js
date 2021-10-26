@@ -2,6 +2,7 @@ import * as mobilenet from "@tensorflow-models/mobilenet";
 import '@tensorflow/tfjs-backend-webgl';
 
 import { useState, useEffect, useRef } from 'react';
+import { classify } from "../utils/ts-classify";
 
 function ImageHolder() {
   const [model, setModel] = useState(null);
@@ -11,26 +12,6 @@ function ImageHolder() {
   const [predictions, setPredictions] = useState([]);
 
   const imgRef = useRef();
-
-  const loadModel = async () => {
-    const loadedModel = await mobilenet.load();
-    setModel(loadedModel);
-  }
-
-  const classify = async () => {
-    const predictions = await model.classify(imgRef.current);
-    const parsedPredictions = [];
-    for (const entry of predictions) {
-      const pred = {
-        name: entry.className,
-        probability: entry.probability
-      };
-      parsedPredictions.push(pred);
-    }
-    setPredictions(parsedPredictions);
-    console.log(predictions);
-    console.log(parsedPredictions);
-  }
 
   const uploadImage = event => {
     const { files } = event.target;
@@ -42,13 +23,18 @@ function ImageHolder() {
     }
   }
 
-  useEffect(() => {
-    const loadModel = async () => {
-      const loadedModel = await mobilenet.load();
-      setModel(loadedModel);
-    }
-    loadModel();
+  // These three are the important parts to get tensorflow mobilenet working:
+  const loadModel = async () => {
+    const loadedModel = await mobilenet.load();
+    setModel(loadedModel);
+  }
 
+  const clickHandler = () => {
+    classify(model, setPredictions, imgRef);
+  }
+
+  useEffect(() => {
+    loadModel();
   },[])
 
   return (
@@ -62,7 +48,7 @@ function ImageHolder() {
       <div className="renderedImage">
         {imageURL && <img src={imageURL} alt="Upload Preview" crossOrigin="anonymous" ref={imgRef} />}
       </div>
-      {imageURL && <button className='button' onClick={classify}>Classify Image</button>}
+      {imageURL && <button className='button' onClick={clickHandler}>Classify Image</button>}
     </div>
   )
 
