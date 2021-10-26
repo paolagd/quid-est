@@ -1,3 +1,11 @@
+import * as mobilenet from "@tensorflow-models/mobilenet";
+import '@tensorflow/tfjs-backend-webgl';
+
+export async function loadModel(callback) {
+  const loadedModel = await mobilenet.load();
+  callback(loadedModel);
+}
+
 /* Returns an array of three prediction objects {name:__, probability:__} from image
  * param1: model: the loaded tensorflow mobilenet model
  * param2: callback: callback function to execute when predictions are returned
