@@ -90,13 +90,32 @@ const resetPassword = (email) => {
 
 const uploadImage = async (userID, file) => {
   // create a reference in storage & upload file
-  const storageRef = ref(storage, `users/${userID}/${file.name}`);
-  await uploadBytes(storageRef, file).then((snapshot) => {
-    console.log('Uploaded a blob or file!');
-  });
+  try {
+    const storageRef = ref(storage, `users/${userID}/${file.name}`);
+    await uploadBytes(storageRef, file);
+    console.log('Uploaded a blob or file to storage');
+  } catch (error) {
+    console.log("Error while adding document to storage:", error);
+  }
 
-  // return a promise with download url
-  return getDownloadURL(ref(storage, `users/${userID}/${file.name}`));
+  // obtain the download url for the image
+  const downloadURL = await getDownloadURL(ref(storage, `users/${userID}/${file.name}`));
+  console.log("download url:", downloadURL);
+
+
+  // add a document in db which contains the user_id and downloadURL for the thing
+  try {
+    const docRef = await addDoc(collection(db, "things"), {
+      userID,
+      downloadURL,
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+
+  // return download url for the image to caller
+  return downloadURL;
 }
 
 export {
