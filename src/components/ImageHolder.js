@@ -1,8 +1,6 @@
-import * as mobilenet from "@tensorflow-models/mobilenet";
-import '@tensorflow/tfjs-backend-webgl';
 
 import { useState, useEffect, useRef } from 'react';
-import { classify } from "../utils/ts-classify";
+import { loadModel, classify } from "../utils/ts-classify";
 
 function ImageHolder() {
   const [model, setModel] = useState(null);
@@ -23,18 +21,13 @@ function ImageHolder() {
     }
   }
 
-  // These three are the important parts to get tensorflow mobilenet working:
-  const loadModel = async () => {
-    const loadedModel = await mobilenet.load();
-    setModel(loadedModel);
-  }
-
+  // These are the important parts to get tensorflow mobilenet working:
   const clickHandler = () => {
     classify(model, setPredictions, imgRef);
   }
 
   useEffect(() => {
-    loadModel();
+    loadModel(setModel);
   },[])
 
   return (
