@@ -12,7 +12,12 @@ export async function loadModel(callback) {
  * param3: reference to image from DOM
  */
 export async function classify(model, callback, imgRef) {
+  if (model === null) return;
   const predictions = await model.classify(imgRef.current);
   callback(predictions);
   console.log(predictions);
+}
+
+export function parsePercent(num) {
+  return (num*100).toFixed(2);
 }
