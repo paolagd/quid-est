@@ -1,7 +1,7 @@
 export default function TopBar(props) {
-  const { user } = props;
-   
-  console.log(user)
+  const { user, logout } = props;
+
+  console.log(user);
   return (
     <nav className="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
       <div className="container-fluid">
@@ -115,7 +115,7 @@ export default function TopBar(props) {
                 href="/"
               >
                 <span className="d-none d-lg-inline me-2 text-gray-600 small">
-                  { user && user.email}
+                  {user && user.email}
                 </span>
                 <img
                   className="border rounded-circle img-profile"
@@ -133,7 +133,7 @@ export default function TopBar(props) {
                   &nbsp;Settings
                 </a>
                 <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" onClick={() => logout()}>
                   <i className="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>
                   &nbsp;Logout
                 </a>
