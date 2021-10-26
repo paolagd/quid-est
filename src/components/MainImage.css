@@ -12,3 +12,12 @@
   height: auto;
 }
 
+.file-input {
+  display: none;
+}
+
+.upload-image-button {
+  float: right;
+  margin-top: 20px;
+}
+
