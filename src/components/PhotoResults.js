@@ -7,6 +7,8 @@ import TopBar from "./TopBar";
 import { classify, loadModel, parsePercent } from "../utils/ts-classify";
 import { translate } from "../utils/translate";
 
+import './PhotoResults.css';
+
 function PhotoResults(props) {
   const [user, loading, error] = useAuthState(auth);
   const [model, setModel] = useState(null);
@@ -67,30 +69,39 @@ function PhotoResults(props) {
                       <div className="card-header py-3">
                         <h2 className="text-primary m-0 fw-bold">What is it?</h2>
                       </div>
-                      <div className="card-body">
+                      <div className="card-body classify-results">
                         <div className="row">
-                          <div className="col">
-                            <h2>{predictions[0] && predictions[0].className}</h2><small>{predictions[0] && parsePercent(predictions[0].probability)}% confidence</small>
-                          </div>
-                          <div className="col">
-                            <h2>{translation1 || "loading..."}</h2>
-                          </div>
+                          <button type="button" class="btn btn-outline-primary">
+                            <div className="col">
+                              {predictions[0] && predictions[0].className}<br/>
+                              <small>{predictions[0] && parsePercent(predictions[0].probability)}% confidence</small>
+                            </div>
+                            <div className="col">
+                              <h6>{translation1 || "loading..."}</h6>
+                            </div>
+                          </button>
                         </div>
                         <div className="row">
-                          <div className="col">
-                            <h2>{predictions[1] && predictions[1].className}</h2><small>{predictions[1] && parsePercent(predictions[1].probability)}% confidence</small>
-                          </div>
-                          <div className="col">
-                            <h2>{translation2 || "loading..."}</h2>
-                          </div>
+                        <button type="button" class="btn btn-outline-primary">
+                            <div className="col">
+                              {predictions[1] && predictions[1].className}<br/>
+                              <small>{predictions[1] && parsePercent(predictions[1].probability)}% confidence</small>
+                            </div>
+                            <div className="col">
+                              <h6>{translation2 || "loading..."}</h6>
+                            </div>
+                          </button>
                         </div>
                         <div className="row">
-                          <div className="col">
-                            <h2>{predictions[2] && predictions[2].className}</h2><small>{predictions[2] && parsePercent(predictions[2].probability)}% confidence</small>
-                          </div>
-                          <div className="col">
-                            <h2>{translation3 || "loading..."}</h2><small></small>
-                          </div>
+                        <button type="button" class="btn btn-outline-primary">
+                            <div className="col">
+                              {predictions[2] && predictions[2].className}<br/>
+                              <small>{predictions[2] && parsePercent(predictions[2].probability)}% confidence</small>
+                            </div>
+                            <div className="col">
+                              <h6>{translation3 || "loading..."}</h6>
+                            </div>
+                          </button>
                         </div>
                         <div className="mb-3"><button className="btn btn-primary btn-sm" type="submit">Save to Dictionary</button></div>
                       </div>
