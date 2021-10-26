@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useHistory } from 'react-router-dom';
 import { auth, uploadImage } from '../utils/firebase';
@@ -8,6 +8,7 @@ function MainImage() {
   const [imageURL, setImageURL] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
+  const fileInput = useRef(null);
 
   useEffect(() => {
     if (loading) return;
@@ -33,7 +34,14 @@ function MainImage() {
         type="file"
         accept=".png, .jpg"
         onChange={(e) => fileChange(e.target.files)}
+        ref={fileInput}
       />
+      <button
+        className="upload-image-button"
+        onClick={() => fileInput.current.click()}
+      >
+        Upload Image
+      </button>
     </div>
   );
 }
