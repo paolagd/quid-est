@@ -17,10 +17,12 @@ function MainImage() {
   }, [user, loading, error, history]);
 
   const fileChange = async (files) => {
-    console.log(files[0].name);
-    const downloadURL = await uploadImage(user.uid, files[0]);
-    console.log(downloadURL);
-    setImageURL(downloadURL);
+    if (files[0]) {
+      console.log(files[0].name);
+      const downloadURL = await uploadImage(user.uid, files[0]);
+      console.log(downloadURL);
+      setImageURL(downloadURL);
+    }
   }
 
   return (
