@@ -12,19 +12,28 @@ export default function Quiz() {
   const [userAnswers, setUserAnswers] = useState([]);
   const [user, loading, error] = useAuthState(auth);
   const [gameOver, setGameOver] = useState(true);
+  const [score, setScore] = useState(0);
 
   console.log(questions); 
-  //Retrieves data from the db
-  // [
-      //   7knUSBZ59NPzY3QXd07H: 
-      //     {userID: "UeoamYyQBARP544c1iypdke6gzP2", downloadURL: "https://firebasestorage.googleapis.com/v0/b/fir-pr…=media&token=1d7ae25e-e110-4c30-b1d7-809345827346"}
-      //   QmwpWKVsH9t7WvCWJxkq: 
-      //     {translatedWord: "casa", languageTo: "es", downloadURL: "https://firebasestorage.googleapis.com/v0/b/fir-pr…=media&token=fb31b448-d74a-4f84-8297-09618e9e8fb9", sourceWord: "house", difficultyFlag: 1, …}
+  //Retrieves data from the db (3) [{…}, {…}, {…}]
+  // [ 
+      // QmwpWKVsH9t7WvCWJxkq: 
+      //     {translatedWord: "casa", languageTo: "es", downloadURL: "https://firebasestorage.googleapis.com/v0/b/fir-pr…=media&token=fb31b448-d74a-4f84-8297-09618e9e8fb9", sourceWord: "house", difficultyFlag: 1, userID}
       // ]
 
+  //Resets quiz and retrieves user dictionary items for the questions
   const getThings = async () => {
-    const things = await getUserDictionary(user.uid); 
+    setOnLoading(true);
+    setGameOver(false);
+    //fetching user dictionary items
+    const things = await getUserDictionary(user.uid);  
+    //TODO:Add difficulty and limit if needed and sort array
+    //TODO: proper error handling
     setQuestions(things); 
+    setScore(0);
+    setUserAnswers([]);
+    setNumber(0);
+    setOnLoading(false);
   };
  
   const checkAnswer = () => {};
