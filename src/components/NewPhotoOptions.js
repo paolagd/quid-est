@@ -56,11 +56,11 @@ function NewPhotoOptions() {
         ref={fileInput}
       />
 
-      <div className="m-5">
-          <div className="text-center m-3"><button className="btn btn-primary btn-lg border rounded-0 " onClick={() => fileInput.current.click()} type="button" style={{width: "300px"}}>Upload Photo</button></div>
-          <div className="text-center m-3"><button className="btn btn-success btn-lg border rounded-0 " type="button" style={{width: "300px"}}>Take New Photo</button></div>
-          <div className="text-center m-3"><button className="btn btn-warning btn-lg border rounded-0 " type="button" style={{width: "300px"}}>Photo by URL</button></div>
-          <div className="text-center m-3"><button className="btn btn-danger btn-lg border rounded-0 " type="button" style={{width: "300px"}}>Back</button></div>
+      <div className="search-button-holder">
+        <div className="text-center mt-3 mb-3"><button className="btn btn-primary btn-lg border rounded-0 " onClick={() => fileInput.current.click()} type="button">Upload Photo</button></div>
+        <div className="text-center mt-3 mb-3"><button className="btn btn-success btn-lg border rounded-0 " type="button">Take New Photo</button></div>
+        <div className="text-center mt-3 mb-3"><button className="btn btn-warning btn-lg border rounded-0 " type="button">Photo by URL</button></div>
+        <div className="text-center mt-3 mb-3"><button className="btn btn-danger btn-lg border rounded-0 " type="button">Back</button></div>
       </div>
     </div> 
   );
