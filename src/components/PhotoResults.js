@@ -71,80 +71,70 @@ function PhotoResults(props) {
     }
   }, [predictions])
 
-  return (
-    <div id="wrapper">
-      <SideBar/>
-      <div className="d-flex flex-column" id="content-wrapper">
-        <div id="content">
-          <TopBar user={user} logout={logout} />
-        </div>
-
-        <div id="content">
-          <div className="container-fluid">
-            <div className="row mb-3">
-              <div className="col-lg-4">
-                <div className="card mb-3">
-                  <div className="card-body text-center shadow">
-                    <img className="mb-3 mt-4" src={imgUrl || "placeholder.jpg"} crossOrigin="anonymous" ref={imgRef} height="auto" width="100%"/>
-                  </div>
-                </div>
-              <div className="card shadow mb-4"></div>
-              </div>
-              <div className="col-lg-8">
-                <div className="row">
-                  <div className="col">
-                    <div className="card shadow mb-3">
-                      <div className="card-header py-3">
-                        <h2 className="text-primary m-0 fw-bold">What is it?</h2>
-                      </div>
-                      <div className="card-body classify-results">
-                        <div className="row">
-                          <button type="button" className="btn btn-outline-primary" onClick={selectFirstTranslation}>
-                            <div className="col">
-                              {predictions[0] && predictions[0].className}<br/>
-                              <small>{predictions[0] && parsePercent(predictions[0].probability)}% confidence</small>
-                            </div>
-                            <div className="col">
-                              <h6>{translation1 || "loading..."}</h6>
-                            </div>
-                          </button>
-                        </div>
-                        <div className="row">
-                        <button type="button" className="btn btn-outline-primary" onClick={selectSecondTranslation}>
-                            <div className="col">
-                              {predictions[1] && predictions[1].className}<br/>
-                              <small>{predictions[1] && parsePercent(predictions[1].probability)}% confidence</small>
-                            </div>
-                            <div className="col">
-                              <h6>{translation2 || "loading..."}</h6>
-                            </div>
-                          </button>
-                        </div>
-                        <div className="row">
-                        <button type="button" className="btn btn-outline-primary" onClick={selectThirdTranslation}>
-                            <div className="col">
-                              {predictions[2] && predictions[2].className}<br/>
-                              <small>{predictions[2] && parsePercent(predictions[2].probability)}% confidence</small>
-                            </div>
-                            <div className="col">
-                              <h6>{translation3 || "loading..."}</h6>
-                            </div>
-                          </button>
-                        </div>
-                        <div className="mb-3"><button className="btn btn-primary btn-sm" type="button" onClick={saveSelectionsToFirestore} >Save to Dictionary</button></div>
-                      </div>
-                    </div>
-                    <div className="card shadow"></div>
-                  </div>
-                </div>
+  return ( 
+    <div id="content">
+      <div className="container-fluid">
+        <div className="row mb-3">
+          <div className="col-lg-4">
+            <div className="card mb-3">
+              <div className="card-body text-center shadow">
+                <img className="mb-3 mt-4" src={imgUrl || "placeholder.jpg"} crossOrigin="anonymous" ref={imgRef} height="auto" width="100%"/>
               </div>
             </div>
-            <div className="card shadow mb-5"></div>
+          <div className="card shadow mb-4"></div>
+          </div>
+          <div className="col-lg-8">
+            <div className="row">
+              <div className="col">
+                <div className="card shadow mb-3">
+                  <div className="card-header py-3">
+                    <h2 className="text-primary m-0 fw-bold">What is it?</h2>
+                  </div>
+                  <div className="card-body classify-results">
+                    <div className="row">
+                      <button type="button" className="btn btn-outline-primary" onClick={selectFirstTranslation}>
+                        <div className="col">
+                          {predictions[0] && predictions[0].className}<br/>
+                          <small>{predictions[0] && parsePercent(predictions[0].probability)}% confidence</small>
+                        </div>
+                        <div className="col">
+                          <h6>{translation1 || "loading..."}</h6>
+                        </div>
+                      </button>
+                    </div>
+                    <div className="row">
+                    <button type="button" className="btn btn-outline-primary" onClick={selectSecondTranslation}>
+                        <div className="col">
+                          {predictions[1] && predictions[1].className}<br/>
+                          <small>{predictions[1] && parsePercent(predictions[1].probability)}% confidence</small>
+                        </div>
+                        <div className="col">
+                          <h6>{translation2 || "loading..."}</h6>
+                        </div>
+                      </button>
+                    </div>
+                    <div className="row">
+                    <button type="button" className="btn btn-outline-primary" onClick={selectThirdTranslation}>
+                        <div className="col">
+                          {predictions[2] && predictions[2].className}<br/>
+                          <small>{predictions[2] && parsePercent(predictions[2].probability)}% confidence</small>
+                        </div>
+                        <div className="col">
+                          <h6>{translation3 || "loading..."}</h6>
+                        </div>
+                      </button>
+                    </div>
+                    <div className="mb-3"><button className="btn btn-primary btn-sm" type="button" onClick={saveSelectionsToFirestore} >Save to Dictionary</button></div>
+                  </div>
+                </div>
+                <div className="card shadow"></div>
+              </div>
+            </div>
           </div>
         </div>
-        
+        <div className="card shadow mb-5"></div>
       </div>
-    </div>
+    </div> 
   );
 }
 export default PhotoResults;

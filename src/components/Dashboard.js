@@ -1,18 +1,14 @@
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, logout } from "../utils/firebase"; 
-import SideBar from "./SideBar/SideBar";
-import TopBar from "./TopBar";
+import { useHistory } from "react-router-dom"; 
+import { useAuthState } from "react-firebase-hooks/auth"; 
+import { auth } from "../utils/firebase";   
+
 import "./Dashboard.css";
 
 function Dashboard() {
-  const [user, loading, error] = useAuthState(auth);
-  const history = useHistory();
 
-  const logoutUser = () => {
-    logout();
-  };
+  const [user, loading, error] = useAuthState(auth); 
+  const history = useHistory();
 
   useEffect(() => {
     if (loading) return;
@@ -21,26 +17,23 @@ function Dashboard() {
   }, [user, loading, error, history]);
 
   return (
-    <div id="wrapper">
-      <SideBar/>
-      <div className="d-flex flex-column" id="content-wrapper">
-        <div id="content">
-          <TopBar user={user} logout={logoutUser} />
-        </div>
+    <div className="container-fluid">
+      <div className="d-sm-flex justify-content-between align-items-center mb-4">
+        <h3 className="text-dark mb-0">Dashboard</h3>
+        
       </div>
-
-      {/* <div className="dashboard">
-        <div className="dashboard__container">
-          Logged in as
-          <div>{user?.email}</div>
-          <button className="dashboard__btn" onClick={logoutUser}>
-            Logout
-          </button>
-        </div>
-        <ImageHolder />
-      </div> */}
-
     </div>
   );
 }
 export default Dashboard;
+
+//  {/* <div className="dashboard">
+//         <div className="dashboard__container">
+//           Logged in as
+//           <div>{user?.email}</div>
+//           <button className="dashboard__btn" onClick={logoutUser}>
+//             Logout
+//           </button>
+//         </div>
+//         <ImageHolder />
+//       </div> */}
