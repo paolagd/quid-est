@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, logout } from "../utils/firebase";
+import { auth, logout, db } from "../utils/firebase";
 import SideBar from "./SideBar/SideBar";
 import TopBar from "./TopBar";
 import { classify, loadModel, parsePercent } from "../utils/ts-classify";
 import { translate } from "../utils/translate";
+import { doc, setDoc } from "firebase/firestore"; 
 
 import './PhotoResults.css';
 
@@ -22,6 +23,7 @@ function PhotoResults(props) {
   const imgRef = useRef();
   const imgUrl = props.location.imgUrl;
   const language = props.location.language;
+  const documentId = props.location.documentId;
 
   const selectFirstTranslation = () => {
     setSourceWord(predictions[0].className);
@@ -38,9 +40,11 @@ function PhotoResults(props) {
     setTranslatedWord(translation3);
   };
 
-  // TODO: Implement this one for the Save To Dictionary button.
+  // TODO: Display some kind of confirmation after this is called.
   const saveSelectionsToFirestore = () => {
-    console.log(`Saving sourceWord: ${sourceWord} and translatedWord: ${translatedWord}.`);
+    console.log(`Saving sourceWord: ${sourceWord} and translatedWord: ${translatedWord} to document with id: ${documentId}.`);
+    const docRef = doc(db, 'things', documentId);
+    setDoc(docRef, { sourceWord, translatedWord }, { merge: true });
   }
 
   useEffect(() => {
@@ -127,7 +131,7 @@ function PhotoResults(props) {
                             </div>
                           </button>
                         </div>
-                        <div className="mb-3"><button className="btn btn-primary btn-sm" type="submit">Save to Dictionary</button></div>
+                        <div className="mb-3"><button className="btn btn-primary btn-sm" type="button" onClick={saveSelectionsToFirestore} >Save to Dictionary</button></div>
                       </div>
                     </div>
                     <div className="card shadow"></div>

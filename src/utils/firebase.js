@@ -102,20 +102,21 @@ const uploadImage = async (userID, file) => {
   const downloadURL = await getDownloadURL(ref(storage, `users/${userID}/${file.name}`));
   console.log("download url:", downloadURL);
 
-
+  let documentId = null;
   // add a document in db which contains the user_id and downloadURL for the thing
   try {
     const docRef = await addDoc(collection(db, "things"), {
       userID,
       downloadURL,
     });
+    documentId = docRef.id;
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
     console.error("Error adding document: ", e);
   }
 
   // return download url for the image to caller
-  return downloadURL;
+  return { downloadURL, documentId };
 }
 
 export {
