@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, logout } from "../utils/firebase";
-import ImageHolder from "./ImageHolder";
+import { auth, logout } from "../utils/firebase"; 
 import SideBar from "./SideBar/SideBar";
 import TopBar from "./TopBar";
 import "./Dashboard.css";
