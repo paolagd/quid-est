@@ -46,29 +46,23 @@ function NewPhotoOptions() {
 
   // TODO: Fix CSS so the buttons on ln30-33 are at the top.
   return (
-    <div id="wrapper">
-      <SideBar/>
-      <div className="d-flex flex-column" id="content-wrapper">
-        <div id="content">
-          <TopBar user={user} logout={logout} />
-        </div>
+   
+    <div className="container-fluid"> 
+      <input className="file-input"
+        type="file"
+        capture='camera'
+        accept=".png, .jpg"
+        onChange={(e) => fileChange(e.target.files)}
+        ref={fileInput}
+      />
 
-        <input className="file-input"
-          type="file"
-          capture='camera'
-          accept=".png, .jpg"
-          onChange={(e) => fileChange(e.target.files)}
-          ref={fileInput}
-        />
-
-        <div className="m-5">
-            <div className="text-center m-3"><button className="btn btn-primary btn-lg border rounded-0 " onClick={() => fileInput.current.click()} type="button" style={{width: "300px"}}>Upload Photo</button></div>
-            <div className="text-center m-3"><button className="btn btn-success btn-lg border rounded-0 " type="button" style={{width: "300px"}}>Take New Photo</button></div>
-            <div className="text-center m-3"><button className="btn btn-warning btn-lg border rounded-0 " type="button" style={{width: "300px"}}>Photo by URL</button></div>
-            <div className="text-center m-3"><button className="btn btn-danger btn-lg border rounded-0 " type="button" style={{width: "300px"}}>Back</button></div>
-        </div>
+      <div className="m-5">
+          <div className="text-center m-3"><button className="btn btn-primary btn-lg border rounded-0 " onClick={() => fileInput.current.click()} type="button" style={{width: "300px"}}>Upload Photo</button></div>
+          <div className="text-center m-3"><button className="btn btn-success btn-lg border rounded-0 " type="button" style={{width: "300px"}}>Take New Photo</button></div>
+          <div className="text-center m-3"><button className="btn btn-warning btn-lg border rounded-0 " type="button" style={{width: "300px"}}>Photo by URL</button></div>
+          <div className="text-center m-3"><button className="btn btn-danger btn-lg border rounded-0 " type="button" style={{width: "300px"}}>Back</button></div>
       </div>
-    </div>
+    </div> 
   );
 }
 export default NewPhotoOptions;

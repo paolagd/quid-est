@@ -17,7 +17,7 @@ export default function SideBar() {
         </a>
         <hr className="sidebar-divider my-0" />
         <ul className="navbar-nav text-light" id="accordionSidebar">
-          <SideBarItem title="What is this?" icon="fa-images" />
+          <SideBarItem title="What is this?" icon="fa-images"/>
           <SideBarItem title="History" icon="fa-history" />
           <SideBarItem title="Translate" icon="fa-language" />
           <SideBarItem title="Quiz me!" icon="fa-diagnoses" />
