@@ -16,11 +16,11 @@ export default function SideBar() {
           </div>
         </a>
         <hr className="sidebar-divider my-0" />
-        <ul className="navbar-nav text-light" id="accordionSidebar">
+        <ul className="navbar-nav text-light" id="accordionSidebar"> 
           <SideBarItem title="What is this?" icon="fa-images" url="/newSearch"/>
           <SideBarItem title="History" icon="fa-history" url="/myDictionary"/>
           <SideBarItem title="Translate" icon="fa-language" url="/translate"/>
-          <SideBarItem title="Quiz me!" icon="fa-diagnoses" url="/quiz"/>
+          <SideBarItem title="Quiz me!" icon="fa-diagnoses" url="/quiz"/> 
         </ul>
         <div className="text-center d-none d-md-inline">
           <button
