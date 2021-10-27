@@ -1,9 +1,8 @@
 export default function Question(props) {
   const {
     question,
-    answer,
-    userAnswer,
-    callback,
+    answer, 
+    setAnswer, 
     questionNumber,
     totalQuestions,
     imageURL
@@ -17,7 +16,7 @@ export default function Question(props) {
       <img src={imageURL}/>
       <p>{question}</p>
       <p>Your answer: </p>
-      <input onChange={callback} value={answer}></input>
+      <input value={answer} onChange={(e) => setAnswer(e.target.value)}></input>
     </div>
   );
 }

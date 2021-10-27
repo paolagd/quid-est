@@ -10,6 +10,7 @@ export default function Quiz() {
   const [questions, setQuestions] = useState([]);
   const [number, setNumber] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
+  const [answer, setAnswer] = useState("");
   const [gameOver, setGameOver] = useState(true);
   const [score, setScore] = useState(0);
   const [user, loading, error] = useAuthState(auth);
@@ -30,9 +31,8 @@ export default function Quiz() {
     setOnLoading(false);
   };
 
-  const checkAnswer = (e) => {
-    if (!gameOver) {
-      const answer = e.currentTarget.value;
+  const checkAnswer = () => { 
+    if (!gameOver) { 
       console.log(answer);
       //Review if the answer is correct
       const correct = questions[number].translatedWord === answer;
@@ -52,12 +52,26 @@ export default function Quiz() {
   };
 
   const nextQuestion = () => {
-    const nextQuestion = number + 1;
-    if (nextQuestion === TOTAL_QUESTIONS) {
-      setGameOver(true);
-    } else {
-      setNumber(nextQuestion);
+    if(!answer){
+      alert("Please add an answer");
+      return;
     }
+    checkAnswer();
+    const nextQuestion = number + 1; 
+    setAnswer("")
+    setNumber(nextQuestion);
+     
+  };
+
+  const reviewResults = () => {
+    if(!answer){
+      alert("Please add an answer");
+      return;
+    }
+    checkAnswer();  
+    setAnswer("")
+    setGameOver(true);
+ 
   };
 
   return (
@@ -73,16 +87,17 @@ export default function Quiz() {
           questionNumber={number + 1}
           totalQuestions={TOTAL_QUESTIONS}
           question={questions[number].sourceWord}
-          imageURL={questions[number].downloadURL}
-          userAnswers={userAnswers ? userAnswers[number] : undefined}
+          imageURL={questions[number].downloadURL} 
           callback={checkAnswer}
+          answer={answer}
+          setAnswer={setAnswer}
         />
-      )}
+      )}   
       {!gameOver && !onLoading && number < TOTAL_QUESTIONS - 1 && (
         <button onClick={nextQuestion}>Next</button>
       )}
       {!gameOver && !onLoading && number === TOTAL_QUESTIONS - 1 && (
-        <button>Review Results</button>
+        <button onClick={reviewResults}>Review Results</button>
       )}
     </div>
   );
