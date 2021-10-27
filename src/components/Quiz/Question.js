@@ -6,6 +6,7 @@ export default function Question(props) {
     callback,
     questionNumber,
     totalQuestions,
+    imageURL
   } = props;
 
   return (
@@ -13,10 +14,10 @@ export default function Question(props) {
       <p>
         Question: {questionNumber} / {totalQuestions}
       </p>
+      <img src={imageURL}/>
       <p>{question}</p>
       <p>Your answer: </p>
-      <input value={userAnswer}></input>
-      <button onClick={callback}></button>
+      <input onChange={callback} value={answer}></input>
     </div>
   );
 }
