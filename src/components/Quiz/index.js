@@ -31,11 +31,19 @@ export default function Quiz() {
     setOnLoading(false);
   };
 
+  /*
+    Verifies that the current answer matches the translation for the word shown to the user
+    Returns null if no answer has been provided
+  */
   const checkAnswer = () => { 
-    if (!gameOver) { 
-      console.log(answer);
-      //Review if the answer is correct
-      const correct = questions[number].translatedWord === answer;
+    if(!answer){
+      alert("Please add an answer");
+      return;
+    }
+
+    if (!gameOver) {  
+      //Reviews if the answer is correct
+      const correct = questions[number].translatedWord.toLowerCase() === answer.toLowerCase();
       if (correct) {
         setScore((prev) => prev + 1);
       }
@@ -49,36 +57,32 @@ export default function Quiz() {
       console.log(answerObject);
       setUserAnswers((prev) => [...prev, answerObject]);
     }
+
+    return true;
   };
 
-  const nextQuestion = () => {
-    if(!answer){
-      alert("Please add an answer");
-      return;
-    }
-    checkAnswer();
-    const nextQuestion = number + 1; 
-    setAnswer("")
-    setNumber(nextQuestion);
-     
+  //Verifies provided answer and moves to the next question
+  const nextQuestion = () => { 
+    if(checkAnswer()){
+      const nextQuestion = number + 1; 
+      setAnswer("")
+      setNumber(nextQuestion); 
+    } 
   };
 
+  //Verifies provided answer and finishes the quiz
   const reviewResults = () => {
-    if(!answer){
-      alert("Please add an answer");
-      return;
+    if(checkAnswer()){ 
+      setAnswer("")
+      setGameOver(true);
     }
-    checkAnswer();  
-    setAnswer("")
-    setGameOver(true);
- 
   };
 
   return (
     <div>
       <h1> Quiz!</h1>
       {(gameOver || userAnswers.length === TOTAL_QUESTIONS) && (
-        <button onClick={() => getThings()}>Start</button>
+        <button onClick={() => getThings()}>START QUIZ</button>
       )}
       {gameOver && <p>Score: {score} </p>}
       {onLoading && <p>Loading questions ... </p>}
