@@ -44,7 +44,7 @@ function PhotoResults(props) {
   const saveSelectionsToFirestore = () => {
     console.log(`Saving sourceWord: ${sourceWord} and translatedWord: ${translatedWord} to document with id: ${documentId}.`);
     const docRef = doc(db, 'things', documentId);
-    setDoc(docRef, { sourceWord, translatedWord }, { merge: true });
+    setDoc(docRef, { sourceWord, translatedWord, languageTo: language }, { merge: true });
   }
 
   useEffect(() => {
