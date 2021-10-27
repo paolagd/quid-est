@@ -16,10 +16,32 @@ function PhotoResults(props) {
   const [translation1, setTranslation1] = useState('');
   const [translation2, setTranslation2] = useState('');
   const [translation3, setTranslation3] = useState('');
+  const [sourceWord, setSourceWord] = useState(null);
+  const [translatedWord, setTranslatedWord] = useState(null);
   const history = useHistory();
   const imgRef = useRef();
-  const imgUrl = props.imgUrl;
-  const language = props.language;
+  const imgUrl = props.location.imgUrl;
+  const language = props.location.language;
+
+  const selectFirstTranslation = () => {
+    setSourceWord(predictions[0].className);
+    setTranslatedWord(translation1);
+  };
+
+  const selectSecondTranslation = () => {
+    setSourceWord(predictions[1].className);
+    setTranslatedWord(translation2);
+  };
+
+  const selectThirdTranslation = () => {
+    setSourceWord(predictions[2].className);
+    setTranslatedWord(translation3);
+  };
+
+  // TODO: Implement this one for the Save To Dictionary button.
+  const saveSelectionsToFirestore = () => {
+    console.log(`Saving sourceWord: ${sourceWord} and translatedWord: ${translatedWord}.`);
+  }
 
   useEffect(() => {
     if (loading) return;
@@ -28,6 +50,8 @@ function PhotoResults(props) {
   }, [user, loading, error, history]);
 
   useEffect(() => {
+    console.log("First load imgUrl:")
+    console.log(imgUrl)
     loadModel(setModel);
   }, []);
 
@@ -57,7 +81,7 @@ function PhotoResults(props) {
               <div className="col-lg-4">
                 <div className="card mb-3">
                   <div className="card-body text-center shadow">
-                    <img className="mb-3 mt-4" src={imgUrl || "placeholder.jpg"} ref={imgRef} height="auto" width="100%"/>
+                    <img className="mb-3 mt-4" src={imgUrl || "placeholder.jpg"} crossOrigin="anonymous" ref={imgRef} height="auto" width="100%"/>
                   </div>
                 </div>
               <div className="card shadow mb-4"></div>
@@ -71,7 +95,7 @@ function PhotoResults(props) {
                       </div>
                       <div className="card-body classify-results">
                         <div className="row">
-                          <button type="button" class="btn btn-outline-primary">
+                          <button type="button" className="btn btn-outline-primary" onClick={selectFirstTranslation}>
                             <div className="col">
                               {predictions[0] && predictions[0].className}<br/>
                               <small>{predictions[0] && parsePercent(predictions[0].probability)}% confidence</small>
@@ -82,7 +106,7 @@ function PhotoResults(props) {
                           </button>
                         </div>
                         <div className="row">
-                        <button type="button" class="btn btn-outline-primary">
+                        <button type="button" className="btn btn-outline-primary" onClick={selectSecondTranslation}>
                             <div className="col">
                               {predictions[1] && predictions[1].className}<br/>
                               <small>{predictions[1] && parsePercent(predictions[1].probability)}% confidence</small>
@@ -93,7 +117,7 @@ function PhotoResults(props) {
                           </button>
                         </div>
                         <div className="row">
-                        <button type="button" class="btn btn-outline-primary">
+                        <button type="button" className="btn btn-outline-primary" onClick={selectThirdTranslation}>
                             <div className="col">
                               {predictions[2] && predictions[2].className}<br/>
                               <small>{predictions[2] && parsePercent(predictions[2].probability)}% confidence</small>
