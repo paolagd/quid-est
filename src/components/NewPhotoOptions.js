@@ -23,14 +23,15 @@ function NewPhotoOptions() {
   const fileChange = async (files) => {
     if (files[0]) {
       console.log(files[0].name);
-      const downloadURL = await uploadImage(user.uid, files[0]);
+      const { downloadURL, documentId } = await uploadImage(user.uid, files[0]);
       console.log(downloadURL);
       // setImageURL(downloadURL);
 
       history.push({
         pathname: '/results',
         language: 'es',
-        imgUrl: downloadURL
+        imgUrl: downloadURL,
+        documentId
       })
     }
   }

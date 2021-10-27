@@ -110,6 +110,8 @@ const uploadImage = async (userID, file) => {
   );
   console.log("download url:", downloadURL);
 
+
+  let documentId = null;
   // add a document in db which contains the user_id and downloadURL for the thing
   try {
     const docRef = await addDoc(collection(db, "things"), {
@@ -120,13 +122,15 @@ const uploadImage = async (userID, file) => {
       languageTo: "es",
       difficultyFlag: 1,
     });
+    documentId = docRef.id;
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
     console.error("Error adding document: ", e);
   }
 
   // return download url for the image to caller
-  return downloadURL;
+
+  return { downloadURL, documentId };
 };
 
 const getUserDictionary = async (userID) => {
