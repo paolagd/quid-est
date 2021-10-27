@@ -1,7 +1,6 @@
 export default function TopBar(props) {
   const { user, logout } = props;
-
-  console.log(user);
+ 
   return (
     <nav className="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
       <div className="container-fluid">

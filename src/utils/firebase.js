@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -9,15 +9,14 @@ import {
 import {
   getFirestore,
   collection,
-  addDoc, setDoc, doc,
+  addDoc,
+  setDoc,
+  doc,
+  query,
+  where,
+  getDocs
 } from "firebase/firestore";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-} from "firebase/storage";
-
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -26,14 +25,13 @@ const firebaseConfig = {
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth();
 const storage = getStorage(app);
-
 
 console.log("app", app.options);
 console.log("db", db);
@@ -42,30 +40,38 @@ console.log("storage", storage);
 
 const register = async (name, email, password) => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
     const user = userCredential.user;
     console.log("user registered", user);
     // Add a user document with a generated ID.
     await setDoc(doc(db, "users", user.uid), {
       uid: user.uid,
       name,
-      email
+      email,
     });
     console.log("Document written with ID: ", user.uid);
   } catch (error) {
     console.log("error while adding document for new user: ", error.message);
   }
-}
+};
 
 const loginWithEmail = async (email, password) => {
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
     const user = userCredential.user;
     console.log("user logged in: ", user);
   } catch (error) {
     console.log("error during login: ", error.message);
   }
-}
+};
 
 const logout = async () => {
   try {
@@ -74,11 +80,11 @@ const logout = async () => {
   } catch (error) {
     console.log("error during logout: ", error.message);
   }
-}
+};
 
 const loginWithGoogle = () => {
   console.log("TODO: this functionality is not yet implemented");
-}
+};
 
 const resetPassword = (email) => {
   try {
@@ -86,28 +92,33 @@ const resetPassword = (email) => {
   } catch (error) {
     console.log("error while sending password reset email: ", error.message);
   }
-}
+};
 
 const uploadImage = async (userID, file) => {
   // create a reference in storage & upload file
   try {
     const storageRef = ref(storage, `users/${userID}/${file.name}`);
     await uploadBytes(storageRef, file);
-    console.log('Uploaded a blob or file to storage');
+    console.log("Uploaded a blob or file to storage");
   } catch (error) {
     console.log("Error while adding document to storage:", error);
   }
 
   // obtain the download url for the image
-  const downloadURL = await getDownloadURL(ref(storage, `users/${userID}/${file.name}`));
+  const downloadURL = await getDownloadURL(
+    ref(storage, `users/${userID}/${file.name}`)
+  );
   console.log("download url:", downloadURL);
-
 
   // add a document in db which contains the user_id and downloadURL for the thing
   try {
     const docRef = await addDoc(collection(db, "things"), {
       userID,
       downloadURL,
+      sourceWord: "house",
+      translatedWord: "casa",
+      languageTo: "es",
+      difficultyFlag: 1,
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
@@ -116,7 +127,29 @@ const uploadImage = async (userID, file) => {
 
   // return download url for the image to caller
   return downloadURL;
-}
+};
+
+const getUserDictionary = async (userID) => {
+ 
+  let dictionary = []; 
+  try {
+    const q = query(collection(db, "things"), where("userID", "==", userID));
+
+    const querySnapshot = await getDocs(q);  
+
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      // console.log(doc.id, " => ", doc.data()); 
+      const dataObject = doc.data();
+      dictionary.push({...dataObject, docId: doc.id});
+    });
+
+  } catch (e) {
+    console.error("Error reading documents: ", e);
+  }
+ 
+  return dictionary;
+};
 
 export {
   auth,
@@ -128,4 +161,5 @@ export {
   resetPassword,
   storage,
   uploadImage,
-}
+  getUserDictionary
+};
