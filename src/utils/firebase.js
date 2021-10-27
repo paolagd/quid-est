@@ -131,7 +131,7 @@ const uploadImage = async (userID, file) => {
 
 const getUserDictionary = async (userID) => {
  
-  const dictionary = [];
+  let dictionary = []; 
   try {
     const q = query(collection(db, "things"), where("userID", "==", userID));
 
@@ -140,12 +140,14 @@ const getUserDictionary = async (userID) => {
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
       // console.log(doc.id, " => ", doc.data()); 
-      dictionary[doc.id] = doc.data(); 
+      const dataObject = doc.data();
+      dictionary.push({...dataObject, docId: doc.id});
     });
+
   } catch (e) {
     console.error("Error reading documents: ", e);
   }
-
+ 
   return dictionary;
 };
 
