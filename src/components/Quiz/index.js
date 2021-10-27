@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getUserDictionary, auth } from "../../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Question from "./Question";
+import Results from "./Results";
 
 const TOTAL_QUESTIONS = 3;
 
@@ -17,7 +18,7 @@ export default function Quiz() {
   console.log(questions);
 
   //Resets quiz and retrieves user dictionary items for the questions
-  const getThings = async () => {
+  const getThings = async () => { 
     setOnLoading(true);
     setGameOver(false);
     //fetching user dictionary items
@@ -84,8 +85,11 @@ export default function Quiz() {
       {(gameOver || userAnswers.length === TOTAL_QUESTIONS) && (
         <button onClick={() => getThings()}>START QUIZ</button>
       )}
+
       {gameOver && <p>Score: {score} </p>}
+
       {onLoading && <p>Loading questions ... </p>}
+
       {!gameOver && !onLoading && (
         <Question
           questionNumber={number + 1}
@@ -103,6 +107,9 @@ export default function Quiz() {
       {!gameOver && !onLoading && number === TOTAL_QUESTIONS - 1 && (
         <button onClick={reviewResults}>Review Results</button>
       )}
+
+      {gameOver && userAnswers.length > 0 && <Results userAnswers={userAnswers}/>}
+      <Results userAnswers={userAnswers}/>
     </div>
   );
 }
