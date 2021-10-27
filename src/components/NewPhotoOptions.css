@@ -1,3 +1,8 @@
 .file-input {
   display: none;
 }
+
+.search-button-holder div button {
+  width: 90%;
+  max-width: 350px;
+}
