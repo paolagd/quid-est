@@ -2,7 +2,7 @@ import { useState } from "react";
 import { getUserDictionary, auth } from "../../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Question from "./Question";
-import Results from "./Results";
+import Results from "./Results"; 
 
 const TOTAL_QUESTIONS = 3;
 
@@ -12,15 +12,15 @@ export default function Quiz() {
   const [number, setNumber] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
   const [answer, setAnswer] = useState("");
-  const [gameOver, setGameOver] = useState(true);
+  const [quizOver, setQuizOver] = useState(true);
   const [score, setScore] = useState(0);
   const [user, loading, error] = useAuthState(auth);
-  console.log(questions);
+   
 
   //Resets quiz and retrieves user dictionary items for the questions
   const getThings = async () => { 
     setOnLoading(true);
-    setGameOver(false);
+    setQuizOver(false);
     //fetching user dictionary items
     const things = await getUserDictionary(user.uid);
     //TODO:Add difficulty and limit if needed and sort array
@@ -42,7 +42,7 @@ export default function Quiz() {
       return;
     }
 
-    if (!gameOver) {  
+    if (!quizOver) {  
       //Reviews if the answer is correct
       const correct = questions[number].translatedWord.toLowerCase() === answer.toLowerCase();
       if (correct) {
@@ -54,8 +54,7 @@ export default function Quiz() {
         answer,
         correct,
         correctAnswer: questions[number].translatedWord,
-      };
-      console.log(answerObject);
+      }; 
       setUserAnswers((prev) => [...prev, answerObject]);
     }
 
@@ -75,22 +74,22 @@ export default function Quiz() {
   const reviewResults = () => {
     if(checkAnswer()){ 
       setAnswer("")
-      setGameOver(true);
+      setQuizOver(true);
     }
   };
 
   return (
     <div>
       <h1> Quiz!</h1>
-      {(gameOver || userAnswers.length === TOTAL_QUESTIONS) && (
+      {(quizOver || userAnswers.length === TOTAL_QUESTIONS) && (
         <button onClick={() => getThings()}>START QUIZ</button>
       )}
 
-      {gameOver && <p>Score: {score} </p>}
+      {quizOver && <p>Score: {score} </p>}
 
       {onLoading && <p>Loading questions ... </p>}
 
-      {!gameOver && !onLoading && (
+      {!quizOver && !onLoading && (
         <Question
           questionNumber={number + 1}
           totalQuestions={TOTAL_QUESTIONS}
@@ -101,15 +100,15 @@ export default function Quiz() {
           setAnswer={setAnswer}
         />
       )}   
-      {!gameOver && !onLoading && number < TOTAL_QUESTIONS - 1 && (
+      {!quizOver && !onLoading && number < TOTAL_QUESTIONS - 1 && (
         <button onClick={nextQuestion}>Next</button>
       )}
-      {!gameOver && !onLoading && number === TOTAL_QUESTIONS - 1 && (
+      {!quizOver && !onLoading && number === TOTAL_QUESTIONS - 1 && (
         <button onClick={reviewResults}>Review Results</button>
       )}
 
-      {gameOver && userAnswers.length > 0 && <Results userAnswers={userAnswers}/>}
-      <Results userAnswers={userAnswers}/>
+      {quizOver && userAnswers.length > 0 && <Results userAnswers={userAnswers} questions={questions} />}
+       
     </div>
   );
 }
