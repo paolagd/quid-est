@@ -10,10 +10,9 @@ export default function Quiz() {
   const [questions, setQuestions] = useState([]);
   const [number, setNumber] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
-  const [user, loading, error] = useAuthState(auth);
   const [gameOver, setGameOver] = useState(true);
   const [score, setScore] = useState(0);
-
+  const [user, loading, error] = useAuthState(auth);
   console.log(questions);
 
   //Resets quiz and retrieves user dictionary items for the questions
@@ -67,7 +66,7 @@ export default function Quiz() {
       {(gameOver || userAnswers.length === TOTAL_QUESTIONS) && (
         <button onClick={() => getThings()}>Start</button>
       )}
-      {gameOver && <p>Score:</p>}
+      {gameOver && <p>Score: {score} </p>}
       {onLoading && <p>Loading questions ... </p>}
       {!gameOver && !onLoading && (
         <Question
@@ -79,8 +78,11 @@ export default function Quiz() {
           callback={checkAnswer}
         />
       )}
-      {!gameOver && !onLoading && number !== TOTAL_QUESTIONS - 1 && (
+      {!gameOver && !onLoading && number < TOTAL_QUESTIONS - 1 && (
         <button onClick={nextQuestion}>Next</button>
+      )}
+      {!gameOver && !onLoading && number === TOTAL_QUESTIONS - 1 && (
+        <button>Review Results</button>
       )}
     </div>
   );
