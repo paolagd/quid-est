@@ -45,11 +45,45 @@ function AlternateDictionary() {
 
   return(
     <div className="container-fluid">
-      <h1 className="text-dark mb-4">My Dictionary</h1>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4 dictionar-entry-row">
-        {allEntries}
-        
-      </div>
+      <h3 class="text-dark mb-4">My Dictionary</h3>
+          <div class="card shadow">
+              <div class="card-header py-3">
+                  <p class="text-primary m-0 fw-bold">Employee Info</p>
+              </div>
+                <div class="card-body">
+                  
+                  <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                      <table class="table my-0" id="dataTable">
+                          <thead>
+                              <tr>
+                                  <th>Image</th>
+                                  <th>Name</th>
+                                  <th>Translation</th>
+                                  <th>Language</th>
+                                  <th>Difficulty</th>
+                                  <th> </th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              {allEntries}
+                          </tbody>
+                          <tfoot>
+                              <tr>
+                                  <td><strong>Image</strong></td>
+                                  <td><strong>Name</strong></td>
+                                  <td><strong>Translation</strong></td>
+                                  <td><strong>Language</strong></td>
+                                  <td><strong>Difficulty</strong></td>
+                                  <td><strong> </strong></td>
+                              </tr>
+                          </tfoot>
+                      </table>
+                  </div>
+                </div>
+            </div>
+
+
+
     </div>
 
     
