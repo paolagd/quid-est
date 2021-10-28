@@ -46,7 +46,7 @@ function Dictionary() {
   return(
     <div className="container-fluid">
       <h1 className="text-dark mb-4">My Dictionary</h1>
-      <div class="row row-cols-1 row-cols-md-3 row-cols-xl-4 g-4 dictionar-entry-row">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4 dictionar-entry-row">
         {allEntries}
         
       </div>
