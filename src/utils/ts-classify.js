@@ -12,6 +12,14 @@ const pred = async (model, img) => {
   return predictions;
 }
 
+// user to temsorflow -- here's an img, what is it?
+// tensorflow: i think it's a nematode, nematode worm, roundworm
+// user: you're wrong tensorflow, do it again
+// tensorflow: i think it's a nematode, nematode worm, roundworm
+// user: you're wrong tensorflow, do it again
+// .... after a few tries
+// tensorflow: ok, i think it's a ...gives the correct answer...
+// user: ok tensorflow, you can exit the loop now
 const mlBurst = async (img) => {
   // Load the model.
   const model = await mobilenet.load();
