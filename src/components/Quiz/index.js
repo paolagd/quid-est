@@ -6,7 +6,7 @@ import Results from "./Results";
 import { shuffle } from "../../helpers/quiz";
 import "./Quiz.css";
 
-const TOTAL_QUESTIONS = 3;
+const TOTAL_QUESTIONS = 4;
 
 export default function Quiz() {
   const [onLoading, setOnLoading] = useState(false);
@@ -16,16 +16,26 @@ export default function Quiz() {
   const [answer, setAnswer] = useState("");
   const [quizOver, setQuizOver] = useState(true);
   const [score, setScore] = useState(0);
+  const [quizDifficulty, setQuizDifficulty] = useState("All");
   const [user, loading, error] = useAuthState(auth);
- 
+
   //Resets quiz and retrieves user dictionary items for the questions
   const getThings = async () => {
     setOnLoading(true);
     setQuizOver(false);
     //fetching user dictionary items
-    const things = await getUserDictionary(user.uid);
-    //TODO:Add difficulty and limit if needed and sort array
+    const things = await getUserDictionary(user.uid, quizDifficulty);
+
+    if (things.length < TOTAL_QUESTIONS) {
+      alert(
+        `You need to have at least ${TOTAL_QUESTIONS} items in your dictionary for the selected level.`
+      );
+      setQuizOver(true);
+      setOnLoading(false);
+      return;
+    }
     //TODO: proper error handling
+
     setQuestions(shuffle(things));
     setScore(0);
     setUserAnswers([]);
@@ -88,7 +98,7 @@ export default function Quiz() {
     setUserAnswers([]);
     setAnswer("");
     setQuizOver(true);
-    setScore(0); 
+    setScore(0);
   };
 
   return (
@@ -107,7 +117,17 @@ export default function Quiz() {
               as many times as you need.
             </h5>
             <hr />
-            <h4>Select difficulty level:*** </h4>
+            <h4>Select difficulty level:</h4>
+            <select
+              value={quizDifficulty}
+              className="btn dropdown-toggle"
+              onChange={(e) => setQuizDifficulty(e.target.value)}
+            >
+              <option value="All">All levels</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+            </select>
             <hr />
             <button
               className="btn btn-primary d-block btn-user w-100"
