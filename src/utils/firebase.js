@@ -103,7 +103,7 @@ const uploadImage = async (userID, file) => {
       sourceword: "",
       translatedword: "",
       languageto: "es",
-      difficultyflag: 1,
+      difficultyflag: "Easy",
     });
     const documentId = docRef.id;
     console.log("document written with id: ", documentId);
@@ -137,9 +137,7 @@ const getUserDictionary = async (userID) => {
 
     const querySnapshot = await getDocs(q);
 
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      // console.log(doc.id, " => ", doc.data()); 
+    querySnapshot.forEach((doc) => { 
       const dataObject = doc.data();
       dictionary.push({ ...dataObject, docId: doc.id });
     });
@@ -154,6 +152,18 @@ const getUserDictionary = async (userID) => {
   return dictionary;
 };
 
+
+const updateWordDifficulty = async (docID, difficulty) => {  
+  try {
+    const wordRef = doc(db, 'things', docID);
+    setDoc(wordRef, { difficultyFlag : difficulty }, { merge: true });
+
+  } catch (e) {
+    console.error("Error occured while writing document: ", e);
+  } 
+};
+
+
 export {
   auth,
   db,
@@ -164,5 +174,6 @@ export {
   resetPassword,
   storage,
   uploadImage,
-  getUserDictionary
+  getUserDictionary,
+  updateWordDifficulty
 };
