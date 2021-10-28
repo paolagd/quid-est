@@ -14,8 +14,15 @@
   display: flex;
   flex-direction: column;
 }
+
+.main-quiz-container .header .dropdown-toggle{
+  font-weight: bold;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgb(78 115 223 / 25%);
+  background: #ebedf3;
+}
  
-.main-quiz-container .header h3{
+.main-quiz-container .header h3, .main-quiz-container .header h4, .main-quiz-container .header option{
   font-weight: bold;
 }
 

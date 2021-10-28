@@ -6,7 +6,7 @@ export default function Results(props) {
   const { userAnswers, questions, score, totalQuestions, tryAgain } = props;
 
   const parsedResults = parseQuizResults(userAnswers, questions);
-  console.log(parsedResults)
+  
   const results = parsedResults.map((result, index) => {
     return <ResultsTableItem key={index} {...result} />;
   });
