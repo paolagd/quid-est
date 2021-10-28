@@ -5,10 +5,8 @@ import './DictionaryEntry.css';
 
 function DictionaryEntry(props) {
 
-  const { uid, documentID } = props;
-  const deleteThis = () => {
-    deleteItem(uid, documentID);
-  }
+  const { uid, documentID, deleteThis } = props;
+
   return (
     <div className="col">
       <div className="card dictionary-card">

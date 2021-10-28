@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useHistory } from 'react-router-dom';
-import { auth, db } from '../../utils/firebase';
+import { auth, db, deleteItem } from '../../utils/firebase';
 import { collection, query, where, getDocs } from "firebase/firestore";
 import DictionaryEntry from './DictionaryEntry';
 
@@ -21,26 +21,37 @@ function Dictionary() {
 
   }, [user, loading, error, history]);
 
+  const getHistory = async () => {
+    const q = query(thingsRef, where("userID", "==", user.uid));
+    const querySnapshot = await getDocs(q);
+
+    const allDocs = []
+    querySnapshot.forEach((doc) => {
+      // {documentID: doc.id, ...doc.data()});});
+      allDocs.push(
+        <DictionaryEntry
+          key={doc.id}
+          documentID={doc.id}
+          uid={user.uid}
+          deleteThis={() => deleteThis(user.uid, doc.id)}
+          {...doc.data()}
+        />
+      )
+    });
+
+    setAllEntries(allDocs);
+  };
+
+  const deleteThis = async (uid, documentID) => {
+    await deleteItem(uid, documentID);
+    await getHistory();
+  }
+
   useEffect(async () => {
     if (user) {
       console.log("This is user.uid:");
       console.log(user.uid);
-      const q = query(thingsRef, where("userID", "==", user.uid));
-
-      const querySnapshot = await getDocs(q);
-      const allDocs = []
-      querySnapshot.forEach((doc) => {
-        // {documentID: doc.id, ...doc.data()});});
-        allDocs.push(
-          <DictionaryEntry
-            key={doc.id}
-            documentID={doc.id}
-            uid={user.uid}
-            {...doc.data()}
-          />
-        )
-      });
-      setAllEntries(allDocs);
+      await getHistory();
     }
   }, [user]);
 
