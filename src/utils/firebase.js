@@ -100,10 +100,10 @@ const uploadImage = async (userID, file) => {
     // add a document in db for this thing
     const docRef = await addDoc(collection(db, "things"), {
       userID,
-      sourceword: "",
-      translatedword: "",
-      languageto: "es",
-      difficultyflag: "Easy",
+      sourceWord: "",
+      translatedWord: "",
+      languageTo: "es",
+      difficultyFlag: "Easy",
     });
     const documentId = docRef.id;
     console.log("document written with id: ", documentId);
@@ -137,7 +137,7 @@ const getUserDictionary = async (userID) => {
 
     const querySnapshot = await getDocs(q);
 
-    querySnapshot.forEach((doc) => { 
+    querySnapshot.forEach((doc) => {
       const dataObject = doc.data();
       dictionary.push({ ...dataObject, docId: doc.id });
     });
@@ -153,14 +153,14 @@ const getUserDictionary = async (userID) => {
 };
 
 
-const updateWordDifficulty = async (docID, difficulty) => {  
+const updateWordDifficulty = async (docID, difficulty) => {
   try {
     const wordRef = doc(db, 'things', docID);
-    setDoc(wordRef, { difficultyFlag : difficulty }, { merge: true });
+    setDoc(wordRef, { difficultyFlag: difficulty }, { merge: true });
 
   } catch (e) {
     console.error("Error occured while writing document: ", e);
-  } 
+  }
 };
 
 
