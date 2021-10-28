@@ -51,7 +51,7 @@ function NewPhotoOptions() {
       <input className="file-input"
         type="file"
         capture='camera'
-        accept=".png, .jpg"
+        accept=".png, .jpg, .jpeg"
         onChange={(e) => fileChange(e.target.files)}
         ref={fileInput}
       />

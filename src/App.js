@@ -13,6 +13,7 @@ import TopBar from './components/TopBar';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, logout } from "./utils/firebase";   
 import Dictionary from './components/Dictionary/Dictionary';
+import AlternateDictionary from './components/AlternateDictionary/AlternateDictionary';
 
 function App() {
   const [user, loading, error] = useAuthState(auth); 
@@ -43,6 +44,7 @@ function App() {
                   <Route exact path="/newsearch" component={NewPhotoOptions} />
                   <Route exact path="/results" component={PhotoResults} /> 
                   <Route exact path="/mydictionary" component={Dictionary} /> 
+                  <Route exact path="/mydictionary2" component={AlternateDictionary} /> 
                 </div>
               </div> 
             </div>
