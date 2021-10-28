@@ -3,6 +3,7 @@ import { getUserDictionary, auth } from "../../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Question from "./Question";
 import Results from "./Results";
+import { shuffle } from "../../helpers/quiz";
 import "./Quiz.css";
 
 const TOTAL_QUESTIONS = 3;
@@ -23,9 +24,10 @@ export default function Quiz() {
     setQuizOver(false);
     //fetching user dictionary items
     const things = await getUserDictionary(user.uid);
+     
     //TODO:Add difficulty and limit if needed and sort array
     //TODO: proper error handling
-    setQuestions(things);
+    setQuestions(shuffle(things));
     setScore(0);
     setUserAnswers([]);
     setNumber(0);
