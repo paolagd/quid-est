@@ -12,12 +12,19 @@ import {
   addDoc,
   setDoc,
   updateDoc,
+  deleteDoc,
   doc,
   query,
   where,
   getDocs
 } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -129,10 +136,16 @@ const uploadImage = async (userID, file) => {
   }
 };
 
-const deleteItem = (uid, documentID) => {
+const deleteItem = async (uid, documentID) => {
   try {
+    // delete doc from db
+    await deleteDoc(doc(db, "things", documentID));
+
     // delete file from storage
-    console.log(`delete item ${documentID} for user ${uid}`);
+    const blobRef = ref(storage, `users/${uid}/${documentID}`);
+    await deleteObject(blobRef);
+
+    console.log(`deleted item ${documentID} for user ${uid}`);
   } catch (error) {
     console.log(`error`, error);
   }
