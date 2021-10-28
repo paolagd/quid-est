@@ -1,10 +1,13 @@
 import { React } from 'react';
+import { deleteItem } from '../../utils/firebase';
 
 import './DictionaryEntry.css';
 
 function DictionaryEntry(props) {
 
-  return(
+  const { uid, documentID, deleteThis } = props;
+
+  return (
     <div className="col">
       <div className="card dictionary-card">
         <img src={props.downloadURL || "placeholder.jpg"} className="card-img-top img-fluid entry-image" alt="..." />
@@ -17,7 +20,10 @@ function DictionaryEntry(props) {
             <small className="text-muted">{props.languageTo}</small>
           </p>
           <p className="card-text">
-            <button type="button" className="btn btn-danger btn-sm">Delete</button>
+            <button type="button"
+              className="btn btn-danger btn-sm"
+              onClick={deleteThis}
+            >Delete</button>
           </p>
         </div>
       </div>
