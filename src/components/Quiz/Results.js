@@ -1,14 +1,15 @@
 import { parseQuizResults } from "../../helpers/quizSelector";
 import ResultsTableItem from "./ResultsTableItem";
+import "./Results.css";
 
 export default function Results(props) {
   const { userAnswers, questions, score, totalQuestions } = props;
 
   const parsedResults = parseQuizResults(userAnswers, questions);
   console.log(parsedResults)
-  const results = parsedResults.map((result) => {
-     return ( 
-      <ResultsTableItem {...result}/>
+  const results = parsedResults.map((result, index) => { 
+    return ( 
+      <ResultsTableItem key={index} {...result}/>
     );
   });
  
@@ -19,18 +20,18 @@ export default function Results(props) {
         <h4>Score: {score} / {totalQuestions}</h4>
       </div>
       <hr/>
-      <div class="card shadow">
-        {/* <div class="card-header py-3">
-          <p class="text-primary m-0 fw-bold">Quiz Results</p>
+      <div className="card shadow">
+        {/* <div className="card-header py-3">
+          <p className="text-primary m-0 fw-bold">Quiz Results</p>
         </div> */}
-        <div class="card-body">
+        <div className="card-body">
           <div
-            class="table-responsive table mt-2"
+            className="table-responsive table mt-2"
             id="dataTable"
             role="grid"
             aria-describedby="dataTable_info"
           >
-            <table class="table my-0" id="dataTable">
+            <table className="table my-0" id="dataTable">
               <thead>
                 <tr>
                   <th>Image</th>

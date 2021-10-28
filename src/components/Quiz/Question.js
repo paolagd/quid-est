@@ -27,20 +27,20 @@ export default function Question(props) {
       <div className="question">
         <img src={imageURL} alt="questionimage" />
 
-        <div class="card shadow mb-3">
-          <div class="card-header py-3">
-            <h4 class="text-primary m-0 fw-bold">{question}</h4>
+        <div className="card shadow mb-3">
+          <div className="card-header py-3">
+            <h4 className="text-primary m-0 fw-bold">{question}</h4>
           </div>
 
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <div class="mb-3">
-                  <label class="form-label" for="username">
+          <div className="card-body">
+            <div className="row">
+              <div className="col">
+                <div className="mb-3">
+                  <label className="form-label" >
                     <strong>What's the translation?</strong>
                   </label>
                   <input
-                    class="form-control"
+                    className="form-control"
                     type="text"
                     value={answer}
                     onChange={(e) => setAnswer(e.target.value)}
