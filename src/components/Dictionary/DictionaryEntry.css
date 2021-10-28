@@ -1,0 +1,18 @@
+.entry-image {
+  max-height: 280px;
+  object-fit: cover;
+}
+
+.card {
+  height: 100%;
+}
+
+.card-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card-footer p {
+  margin-bottom: 0;
+}
