@@ -6,7 +6,7 @@ function DictionaryEntry(props) {
 
   return(
     <div className="col">
-      <div className="card">
+      <div className="card dictionary-card">
         <img src={props.downloadURL || "placeholder.jpg"} className="card-img-top img-fluid entry-image" alt="..." />
         <div className="card-body">
           <h5 className="card-title">{props.sourceWord}</h5>
