@@ -9,7 +9,7 @@ export default function SideBar() {
           href="#"
         >
           <div className="sidebar-brand-icon rotate-n-15">
-            <i className="fas fa-laugh-wink"></i>
+            <i className="fas fa-camera-retro"></i>
           </div>
           <div className="sidebar-brand-text mx-3">
             <span>Quid-EST</span>
