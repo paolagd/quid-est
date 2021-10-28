@@ -11,6 +11,7 @@ import {
   collection,
   addDoc,
   setDoc,
+  updateDoc,
   doc,
   query,
   where,
@@ -95,55 +96,50 @@ const resetPassword = (email) => {
 };
 
 const uploadImage = async (userID, file) => {
-  // create a reference in storage & upload file
   try {
-    const storageRef = ref(storage, `users/${userID}/${file.name}`);
-    await uploadBytes(storageRef, file);
-    console.log("Uploaded a blob or file to storage");
-  } catch (error) {
-    console.log("Error while adding document to storage:", error);
-  }
-
-  // obtain the download url for the image
-  const downloadURL = await getDownloadURL(
-    ref(storage, `users/${userID}/${file.name}`)
-  );
-  console.log("download url:", downloadURL);
-
-
-  let documentId = null;
-  // add a document in db which contains the user_id and downloadURL for the thing
-  try {
+    // add a document in db for this thing
     const docRef = await addDoc(collection(db, "things"), {
       userID,
-      downloadURL,
-      sourceWord: "house",
-      translatedWord: "casa",
-      languageTo: "es",
-      difficultyFlag: "Easy",
+      sourceword: "",
+      translatedword: "",
+      languageto: "es",
+      difficultyflag: "Easy",
     });
-    documentId = docRef.id;
-    console.log("Document written with ID: ", docRef.id);
-  } catch (e) {
-    console.error("Error adding document: ", e);
+    const documentId = docRef.id;
+    console.log("document written with id: ", documentId);
+
+    // create a reference in storage & upload file
+    const storageref = ref(storage, `users/${userID}/${documentId}`);
+    await uploadBytes(storageref, file);
+    console.log(`uploaded file to storage at path: users/${userID}/${documentId}`);
+
+    // obtain the download url for the image
+    const downloadURL = await getDownloadURL(
+      ref(storage, `users/${userID}/${documentId}`)
+    );
+    console.log("download url:", downloadURL);
+
+    // update the document in db with the downloadURL for the image
+    await updateDoc(docRef, { downloadURL });
+
+    // return download url for the image to caller
+    return { downloadURL, documentId };
+  } catch (error) {
+    console.log(`error`, error);
   }
-
-  // return download url for the image to caller
-
-  return { downloadURL, documentId };
 };
 
 const getUserDictionary = async (userID) => {
- 
-  let dictionary = []; 
+
+  let dictionary = [];
   try {
     const q = query(collection(db, "things"), where("userID", "==", userID));
 
-    const querySnapshot = await getDocs(q);  
+    const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => { 
       const dataObject = doc.data();
-      dictionary.push({...dataObject, docId: doc.id});
+      dictionary.push({ ...dataObject, docId: doc.id });
     });
 
     console.log("Dictionary:");
@@ -152,7 +148,7 @@ const getUserDictionary = async (userID) => {
   } catch (e) {
     console.error("Error reading documents: ", e);
   }
- 
+
   return dictionary;
 };
 
