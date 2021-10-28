@@ -14,7 +14,7 @@ import {
   doc,
   query,
   where,
-  getDocs
+  getDocs,
 } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
@@ -110,7 +110,6 @@ const uploadImage = async (userID, file) => {
   );
   console.log("download url:", downloadURL);
 
-
   let documentId = null;
   // add a document in db which contains the user_id and downloadURL for the thing
   try {
@@ -133,40 +132,42 @@ const uploadImage = async (userID, file) => {
   return { downloadURL, documentId };
 };
 
-const getUserDictionary = async (userID) => {
- 
-  let dictionary = []; 
+const getUserDictionary = async (userID, quizDifficulty) => {
+  let dictionary = [];
+  let q;
+
   try {
-    const q = query(collection(db, "things"), where("userID", "==", userID));
+    if (quizDifficulty === "All")
+      q = query(collection(db, "things"), where("userID", "==", userID));
+    else {
+      q = query(
+        collection(db, "things"),
+        where("userID", "==", userID),
+        where("difficultyFlag", "==", quizDifficulty)
+      );
+    }
 
-    const querySnapshot = await getDocs(q);  
+    const querySnapshot = await getDocs(q);
 
-    querySnapshot.forEach((doc) => { 
+    querySnapshot.forEach((doc) => {
       const dataObject = doc.data();
-      dictionary.push({...dataObject, docId: doc.id});
+      dictionary.push({ ...dataObject, docId: doc.id });
     });
-
-    console.log("Dictionary:");
-    console.log(dictionary);
-
   } catch (e) {
     console.error("Error reading documents: ", e);
   }
- 
+
   return dictionary;
 };
 
-
-const updateWordDifficulty = async (docID, difficulty) => {  
+const updateWordDifficulty = async (docID, difficulty) => {
   try {
-    const wordRef = doc(db, 'things', docID);
-    setDoc(wordRef, { difficultyFlag : difficulty }, { merge: true });
-
+    const wordRef = doc(db, "things", docID);
+    setDoc(wordRef, { difficultyFlag: difficulty }, { merge: true });
   } catch (e) {
     console.error("Error occured while writing document: ", e);
-  } 
+  }
 };
-
 
 export {
   auth,
@@ -179,5 +180,5 @@ export {
   storage,
   uploadImage,
   getUserDictionary,
-  updateWordDifficulty
+  updateWordDifficulty,
 };
