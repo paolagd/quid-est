@@ -11,6 +11,7 @@ import {
   collection,
   addDoc,
   setDoc,
+  updateDoc,
   doc,
   query,
   where,
@@ -94,7 +95,7 @@ const resetPassword = (email) => {
   }
 };
 
-const uploadImage = async (userID, file) => {
+const uploadImage = async (userID, file) => { 
   // create a reference in storage & upload file
   try {
     const storageRef = ref(storage, `users/${userID}/${file.name}`);
@@ -111,27 +112,40 @@ const uploadImage = async (userID, file) => {
   console.log("download url:", downloadURL);
 
   let documentId = null;
-  // add a document in db which contains the user_id and downloadURL for the thing
+  // add a document in db which contains the user_id and downloadURL for the thing 
   try {
+    // add a document in db for this thing
     const docRef = await addDoc(collection(db, "things"), {
       userID,
-      downloadURL,
-      sourceWord: "house",
-      translatedWord: "casa",
+      sourceWord: "",
+      translatedWord: "",
       languageTo: "es",
       difficultyFlag: "Easy",
     });
-    documentId = docRef.id;
-    console.log("Document written with ID: ", docRef.id);
-  } catch (e) {
-    console.error("Error adding document: ", e);
+    const documentId = docRef.id;
+    console.log("document written with id: ", documentId);
+
+    // create a reference in storage & upload file
+    const storageref = ref(storage, `users/${userID}/${documentId}`);
+    await uploadBytes(storageref, file);
+    console.log(`uploaded file to storage at path: users/${userID}/${documentId}`);
+
+    // obtain the download url for the image
+    const downloadURL = await getDownloadURL(
+      ref(storage, `users/${userID}/${documentId}`)
+    );
+    console.log("download url:", downloadURL);
+
+    // update the document in db with the downloadURL for the image
+    await updateDoc(docRef, { downloadURL });
+
+    // return download url for the image to caller
+    return { downloadURL, documentId };
+  } catch (error) {
+    console.log(`error`, error);
   }
-
-  // return download url for the image to caller
-
-  return { downloadURL, documentId };
 };
-
+ 
 const getUserDictionary = async (userID, quizDifficulty) => {
   let dictionary = [];
   let q;
@@ -148,7 +162,7 @@ const getUserDictionary = async (userID, quizDifficulty) => {
     }
 
     const querySnapshot = await getDocs(q);
-
+ 
     querySnapshot.forEach((doc) => {
       const dataObject = doc.data();
       dictionary.push({ ...dataObject, docId: doc.id });
@@ -159,11 +173,11 @@ const getUserDictionary = async (userID, quizDifficulty) => {
 
   return dictionary;
 };
-
+ 
 const updateWordDifficulty = async (docID, difficulty) => {
   try {
     const wordRef = doc(db, "things", docID);
-    setDoc(wordRef, { difficultyFlag: difficulty }, { merge: true });
+    setDoc(wordRef, { difficultyFlag: difficulty }, { merge: true }); 
   } catch (e) {
     console.error("Error occured while writing document: ", e);
   }
