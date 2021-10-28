@@ -1,4 +1,5 @@
 import { parseQuizResults } from "../../helpers/quizSelector";
+import ResultsTableItem from "./ResultsTableItem";
 
 export default function Results(props) {
   const { userAnswers, questions, score, totalQuestions } = props;
@@ -6,35 +7,11 @@ export default function Results(props) {
   const parsedResults = parseQuizResults(userAnswers, questions);
   console.log(parsedResults)
   const results = parsedResults.map((result) => {
-    return (
-      <tr>
-        <td>
-          <img
-            class="rounded-circle me-2"
-            width="40"
-            height="40"
-            src={result.downloadURL}
-          />
-        </td>
-        <td>{result.sourceWord}</td>
-        <td>{result.translatedWord}</td>
-        <td>{result.languageTo}</td>
-        <td>{result.userAnswer}</td>
-        <td>{result.difficultyFlag}</td>
-      </tr>
+     return ( 
+      <ResultsTableItem {...result}/>
     );
   });
-
-  // return (<table>
-  //   <tr>
-  //     <th>Word</th>
-  //     <th>User's Answer</th>
-  //     <th>Correct answer</th>
-  //     <th>difficulty</th>
-  //   </tr>
-  //   {results}
-  // </table>);
-
+ 
   return (
     <>
       <div className="header">
