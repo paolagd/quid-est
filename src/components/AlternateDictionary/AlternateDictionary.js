@@ -48,7 +48,7 @@ function AlternateDictionary() {
       <h3 class="text-dark mb-4">My Dictionary</h3>
           <div class="card shadow">
               <div class="card-header py-3">
-                  <p class="text-primary m-0 fw-bold">Employee Info</p>
+                  <p class="text-primary m-0 fw-bold">Recent Translations</p>
               </div>
                 <div class="card-body">
                   
