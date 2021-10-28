@@ -12,16 +12,16 @@ function Dictionary() {
   const history = useHistory();
   const [allEntries, setAllEntries] = useState([]);
   const thingsRef = collection(db, "things");
-  
+
   useEffect(() => {
     if (loading) return;
     if (error) console.log(error);
     if (!user) history.replace('/login');
-    
-    
+
+
   }, [user, loading, error, history]);
-  
-  useEffect(async() => {
+
+  useEffect(async () => {
     if (user) {
       console.log("This is user.uid:");
       console.log(user.uid);
@@ -33,7 +33,7 @@ function Dictionary() {
         // {documentID: doc.id, ...doc.data()});});
         allDocs.push(
           <DictionaryEntry
-            key={doc.id} 
+            key={doc.id}
             documentID={doc.id}
             {...doc.data()}
           />
@@ -43,16 +43,16 @@ function Dictionary() {
     }
   }, [user]);
 
-  return(
+  return (
     <div className="container-fluid">
       <h1 className="text-dark mb-4">My Dictionary</h1>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4 dictionar-entry-row">
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4 dictionar-entry-row">
         {allEntries}
-        
+
       </div>
     </div>
 
-    
+
   )
 }
 
