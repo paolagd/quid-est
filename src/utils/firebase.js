@@ -148,6 +148,9 @@ const getUserDictionary = async (userID) => {
       dictionary.push({...dataObject, docId: doc.id});
     });
 
+    console.log("Dictionary:");
+    console.log(dictionary);
+
   } catch (e) {
     console.error("Error reading documents: ", e);
   }

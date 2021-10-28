@@ -18,6 +18,8 @@ export default function Quiz() {
   const [score, setScore] = useState(0);
   const [user, loading, error] = useAuthState(auth);
 
+  console.log(questions);
+
   //Resets quiz and retrieves user dictionary items for the questions
   const getThings = async () => {
     setOnLoading(true);
