@@ -8,6 +8,7 @@ export default function Question(props) {
     questionNumber,
     totalQuestions,
     imageURL,
+    score
   } = props;
 
   return (
@@ -20,7 +21,7 @@ export default function Question(props) {
           <p>Question</p>
         </div>
         <div className="info">
-          <div className="tag orange">{questionNumber}</div><p>Score</p>
+          <div className="tag orange">{score} / {totalQuestions}</div><p>Score</p>
         </div>
       </div>
       <div className="question">
