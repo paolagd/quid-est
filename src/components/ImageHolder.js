@@ -28,7 +28,7 @@ function ImageHolder() {
 
   useEffect(() => {
     loadModel(setModel);
-  },[])
+  }, [])
 
   return (
     <div className="imageHolder">
@@ -36,10 +36,10 @@ function ImageHolder() {
         Image:
       </p>
       <div className='inputHolder'>
-        <input type='file' accept='image/*' capture='camera' className='uploadInput' onChange={uploadImage}/>
+        <input type='file' accept='image/*' capture='camera' className='uploadInput' onChange={uploadImage} />
       </div>
       <div className="renderedImage">
-        {imageURL && <img src={imageURL} alt="Upload Preview" crossOrigin="anonymous" ref={imgRef} />}
+        {imageURL && <img src={imageURL} alt="Upload Preview" crossOrigin="anonymous" ref={imgRef} height="auto" width="100%" />}
       </div>
       {imageURL && <button className='button' onClick={clickHandler}>Classify Image</button>}
     </div>
