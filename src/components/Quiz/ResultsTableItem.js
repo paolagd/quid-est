@@ -1,4 +1,5 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState} from "react";
+import { updateWordDifficulty } from "../../utils/firebase";
 
 export default function ResultsTableItem(props) {
   const {
@@ -23,10 +24,11 @@ export default function ResultsTableItem(props) {
 
   const changeDifficulty = (e) => {
     setWordDifficulty(e.target.value);
+    updateWordDifficulty(docId, e.target.value);
   };
 
   useEffect(() => {
-    difficultyStyle(wordDifficulty);
+    difficultyStyle(wordDifficulty); 
   }, [wordDifficulty]);
 
   const difficultyStyle = (currentDifficulty) => {
@@ -51,7 +53,7 @@ export default function ResultsTableItem(props) {
       </td>
       <td>{sourceWord}</td>
       <td>{translatedWord}</td>
-      <td>{languageTo}</td>
+      <td>{languageTo}</td> 
       {userAnswerTd}
       <td>
         <select
@@ -63,8 +65,7 @@ export default function ResultsTableItem(props) {
           <option value="Medium">Medium</option>
           <option value="Hard">Hard</option>
         </select>
-      </td>
-      <td>{docId}</td>
+      </td> 
     </tr>
   );
 }

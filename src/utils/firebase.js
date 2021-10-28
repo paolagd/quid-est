@@ -156,6 +156,18 @@ const getUserDictionary = async (userID) => {
   return dictionary;
 };
 
+
+const updateWordDifficulty = async (docID, difficulty) => {  
+  try {
+    const wordRef = doc(db, 'things', docID);
+    setDoc(wordRef, { difficultyFlag : difficulty }, { merge: true });
+
+  } catch (e) {
+    console.error("Error occured while writing document: ", e);
+  } 
+};
+
+
 export {
   auth,
   db,
@@ -166,5 +178,6 @@ export {
   resetPassword,
   storage,
   uploadImage,
-  getUserDictionary
+  getUserDictionary,
+  updateWordDifficulty
 };
