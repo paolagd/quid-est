@@ -81,24 +81,33 @@ export default function Quiz() {
 
   return (
     <div className="container-fluid main-quiz-container">
-      <div className="header"> 
-        {(quizOver && userAnswers.length < TOTAL_QUESTIONS ) && (
+      <div className="header">
+        {quizOver && userAnswers.length < TOTAL_QUESTIONS && (
           <>
-            <h3>What are quizzes for?</h3> 
-            <hr/>
-            <h5>A quiz is just an opportunity to review again some of the words you have searched in the past.</h5> 
-            <h5>Do not panic! We will keep it simple and you can come back to is as many times as you need.</h5> 
-            <hr/>
-            <h4>Select difficulty level:*** </h4>  
-            <hr/>
-            <button className="btn btn-primary d-block btn-user w-100" onClick={() => getThings()}>QUIZ ME!</button>
+            <h3>What are quizzes for?</h3>
+            <hr />
+            <h5>
+              A quiz is just an opportunity to review again some of the words
+              you have searched in the past.
+            </h5>
+            <h5>
+              Do not panic! We will keep it simple and you can come back to is
+              as many times as you need.
+            </h5>
+            <hr />
+            <h4>Select difficulty level:*** </h4>
+            <hr />
+            <button
+              className="btn btn-primary d-block btn-user w-100"
+              onClick={() => getThings()}
+            >
+              QUIZ ME!
+            </button>
           </>
         )}
 
-        {(!quizOver) && ( 
-          <h3>You can do this!</h3>  
-        )}
-      </div> 
+        {!quizOver && <h3>You can do this!</h3>}
+      </div>
 
       {/* {quizOver && <p>Score: {score} </p>} */}
 
@@ -128,8 +137,11 @@ export default function Quiz() {
           )}
         </div>
       )}
+
       {quizOver && userAnswers.length > 0 && (
-        <Results userAnswers={userAnswers} questions={questions} />
+        <Results userAnswers={userAnswers} questions={questions} 
+        score={score} 
+        totalQuestions={TOTAL_QUESTIONS}/>
       )}
     </div>
   );

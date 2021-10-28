@@ -29,7 +29,7 @@ export default function Question(props) {
 
         <div class="card shadow mb-3">
           <div class="card-header py-3">
-            <p class="text-primary m-0 fw-bold">{question}</p>
+            <h4 class="text-primary m-0 fw-bold">{question}</h4>
           </div>
 
           <div class="card-body">
