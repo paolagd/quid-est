@@ -35,6 +35,7 @@ function Dictionary() {
           <DictionaryEntry
             key={doc.id}
             documentID={doc.id}
+            uid={user.uid}
             {...doc.data()}
           />
         )

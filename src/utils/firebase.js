@@ -129,6 +129,15 @@ const uploadImage = async (userID, file) => {
   }
 };
 
+const deleteItem = (uid, documentID) => {
+  try {
+    // delete file from storage
+    console.log(`delete item ${documentID} for user ${uid}`);
+  } catch (error) {
+    console.log(`error`, error);
+  }
+};
+
 const getUserDictionary = async (userID) => {
 
   let dictionary = [];
@@ -175,5 +184,6 @@ export {
   storage,
   uploadImage,
   getUserDictionary,
-  updateWordDifficulty
+  updateWordDifficulty,
+  deleteItem,
 };
