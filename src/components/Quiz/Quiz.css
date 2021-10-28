@@ -27,7 +27,7 @@
   flex-direction: column;
 } 
 
-.question-container .control{  
+.control{  
   width: 60px;
   height: 60px;  
   background-color: #0C9;
@@ -39,7 +39,7 @@
   box-shadow: 2px 2px 2px #bfc3d0;
 }
 
-.question-container .control.results{  
+.control.results{  
   width: 100px; 
 }
 

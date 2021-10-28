@@ -24,7 +24,7 @@ export default function Quiz() {
     setQuizOver(false);
     //fetching user dictionary items
     const things = await getUserDictionary(user.uid);
-     
+
     //TODO:Add difficulty and limit if needed and sort array
     //TODO: proper error handling
     setQuestions(shuffle(things));
@@ -79,6 +79,17 @@ export default function Quiz() {
       setAnswer("");
       setQuizOver(true);
     }
+  };
+
+  const clearQuiz = () => {
+    setOnLoading(false);
+    setQuestions([]);
+    setQuestions([]);
+    setNumber(0);
+    setUserAnswers([]);
+    setAnswer("");
+    setQuizOver(true);
+    setScore(0); 
   };
 
   return (
@@ -141,9 +152,13 @@ export default function Quiz() {
       )}
 
       {quizOver && userAnswers.length > 0 && (
-        <Results userAnswers={userAnswers} questions={questions} 
-        score={score} 
-        totalQuestions={TOTAL_QUESTIONS}/>
+        <Results
+          userAnswers={userAnswers}
+          questions={questions}
+          score={score}
+          totalQuestions={TOTAL_QUESTIONS}
+          tryAgain={clearQuiz}
+        />
       )}
     </div>
   );

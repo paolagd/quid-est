@@ -3,23 +3,23 @@ import ResultsTableItem from "./ResultsTableItem";
 import "./Results.css";
 
 export default function Results(props) {
-  const { userAnswers, questions, score, totalQuestions } = props;
+  const { userAnswers, questions, score, totalQuestions, tryAgain } = props;
 
   const parsedResults = parseQuizResults(userAnswers, questions);
-  console.log(parsedResults)
-  const results = parsedResults.map((result, index) => { 
-    return ( 
-      <ResultsTableItem key={index} {...result}/>
-    );
+  console.log(parsedResults);
+  const results = parsedResults.map((result, index) => {
+    return <ResultsTableItem key={index} {...result} />;
   });
- 
+
   return (
     <>
       <div className="header">
-        <h3>RESULTS</h3> 
-        <h4>Score: {score} / {totalQuestions}</h4>
+        <h3>RESULTS</h3>
+        <h4>
+          Score: {score} / {totalQuestions}
+        </h4>
       </div>
-      <hr/>
+      <hr />
       <div className="card shadow">
         {/* <div className="card-header py-3">
           <p className="text-primary m-0 fw-bold">Quiz Results</p>
@@ -42,13 +42,15 @@ export default function Results(props) {
                   <th>Difficulty</th>
                 </tr>
               </thead>
-              <tbody>
-                {results}
-              </tbody>
+              <tbody>{results}</tbody>
             </table>
           </div>
         </div>
       </div>
+
+      <button className="control results" onClick={() => tryAgain()}>
+        Try Again
+      </button>
     </>
   );
 }
