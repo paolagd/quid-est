@@ -4,9 +4,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, logout, db } from "../utils/firebase";
 import SideBar from "./SideBar/SideBar";
 import TopBar from "./TopBar";
-import { classify, loadModel, parsePercent } from "../utils/ts-classify";
+import { classify, loadModel, parsePercent, mlBurst } from "../utils/ts-classify";
 import { translate } from "../utils/translate";
-import { doc, setDoc } from "firebase/firestore"; 
+import { doc, setDoc } from "firebase/firestore";
 
 import './PhotoResults.css';
 
@@ -53,35 +53,39 @@ function PhotoResults(props) {
     if (!user) history.replace("/login");
   }, [user, loading, error, history]);
 
-  useEffect(() => {
-    console.log("First load imgUrl:")
-    console.log(imgUrl)
-    loadModel(setModel);
+  // 
+  // following two useEffects are for obtaining the predictions and for translations
+  // 
+  // when component loads, get the predictions from the tensorflow mobilenet model
+  useEffect(async () => {
+    console.log(`img`, imgRef.current);
+    let preds = [];
+    preds = await mlBurst(imgRef.current);
+    console.log("preds", preds);
+    setPredictions(preds);
   }, []);
 
+  // after the predictions are obtained, translate them
   useEffect(() => {
-    classify(model, setPredictions, imgRef)
-  }, [model]);
-
-  useEffect(() => {
+    console.log(`predictions`, predictions);
     if (predictions.length > 0) {
       translate(predictions[0].className, language || 'es', setTranslation1);
       translate(predictions[1].className, language || 'es', setTranslation2);
       translate(predictions[2].className, language || 'es', setTranslation3);
     }
-  }, [predictions])
+  }, [predictions]);
 
-  return ( 
+  return (
     <div id="content">
       <div className="container-fluid">
         <div className="row mb-3">
           <div className="col-lg-4">
             <div className="card mb-3">
               <div className="card-body text-center shadow">
-                <img className="mb-3 mt-4" src={imgUrl || "placeholder.jpg"} crossOrigin="anonymous" ref={imgRef} height="auto" width="100%"/>
+                <img className="mb-3 mt-4" src={imgUrl || "placeholder.jpg"} crossOrigin="anonymous" ref={imgRef} height="auto" width="100%" />
               </div>
             </div>
-          <div className="card shadow mb-4"></div>
+            <div className="card shadow mb-4"></div>
           </div>
           <div className="col-lg-8">
             <div className="row">
@@ -94,7 +98,7 @@ function PhotoResults(props) {
                     <div className="row">
                       <button type="button" className="btn btn-outline-primary" onClick={selectFirstTranslation}>
                         <div className="col">
-                          {predictions[0] && predictions[0].className}<br/>
+                          {predictions[0] && predictions[0].className}<br />
                           <small>{predictions[0] && parsePercent(predictions[0].probability)}% confidence</small>
                         </div>
                         <div className="col">
@@ -103,9 +107,9 @@ function PhotoResults(props) {
                       </button>
                     </div>
                     <div className="row">
-                    <button type="button" className="btn btn-outline-primary" onClick={selectSecondTranslation}>
+                      <button type="button" className="btn btn-outline-primary" onClick={selectSecondTranslation}>
                         <div className="col">
-                          {predictions[1] && predictions[1].className}<br/>
+                          {predictions[1] && predictions[1].className}<br />
                           <small>{predictions[1] && parsePercent(predictions[1].probability)}% confidence</small>
                         </div>
                         <div className="col">
@@ -114,9 +118,9 @@ function PhotoResults(props) {
                       </button>
                     </div>
                     <div className="row">
-                    <button type="button" className="btn btn-outline-primary" onClick={selectThirdTranslation}>
+                      <button type="button" className="btn btn-outline-primary" onClick={selectThirdTranslation}>
                         <div className="col">
-                          {predictions[2] && predictions[2].className}<br/>
+                          {predictions[2] && predictions[2].className}<br />
                           <small>{predictions[2] && parsePercent(predictions[2].probability)}% confidence</small>
                         </div>
                         <div className="col">
@@ -134,7 +138,7 @@ function PhotoResults(props) {
         </div>
         <div className="card shadow mb-5"></div>
       </div>
-    </div> 
+    </div>
   );
 }
 export default PhotoResults;
