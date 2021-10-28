@@ -5,3 +5,7 @@
 .green{
   color:green;
 }
+
+#results-table.dropdown-toggle{
+  height: 38px; 
+}

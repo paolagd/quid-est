@@ -17,16 +17,13 @@ export default function Quiz() {
   const [quizOver, setQuizOver] = useState(true);
   const [score, setScore] = useState(0);
   const [user, loading, error] = useAuthState(auth);
-
-  console.log(questions);
-
+ 
   //Resets quiz and retrieves user dictionary items for the questions
   const getThings = async () => {
     setOnLoading(true);
     setQuizOver(false);
     //fetching user dictionary items
     const things = await getUserDictionary(user.uid);
-
     //TODO:Add difficulty and limit if needed and sort array
     //TODO: proper error handling
     setQuestions(shuffle(things));
