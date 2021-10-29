@@ -41,7 +41,7 @@ function Dashboard() {
         <div className="hero-text">
           <h1 className="hero-title">What am I looking at?</h1>
           <p className="hero-subtitle">
-            Found a cool thing but you don't know how to call it?
+            Found a cool thing but you don't know what to call it?
           </p>
           <p className="hero-subtitle">
             Let us do the work for you.
