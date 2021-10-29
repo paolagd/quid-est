@@ -132,6 +132,7 @@ const uploadImage = async (userID, file) => {
       translatedWord: "",
       languageTo: "es",
       difficultyFlag: "Easy",
+      timestamp: Date.now(),
     });
     const documentId = docRef.id;
     console.log("document written with id: ", documentId);

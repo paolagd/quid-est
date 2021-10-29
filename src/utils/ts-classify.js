@@ -21,15 +21,19 @@ const pred = async (model, img) => {
 // tensorflow: ok, i think it's a ...gives the correct answer...
 // user: ok tensorflow, you can exit the loop now
 const mlBurst = async (img) => {
-  // Load the model.
-  const model = await mobilenet.load();
-  let predictions = await pred(model, img);
-  let trials = 0;
-  while (predictions[0].probability < 0.1 && trials < 10) {
-    predictions = await pred(model, img);
-    trials += 1;
+  try {
+    // Load the model.
+    const model = await mobilenet.load();
+    let predictions = await pred(model, img);
+    let trials = 0;
+    while (predictions[0].probability < 0.1 && trials < 10) {
+      predictions = await pred(model, img);
+      trials += 1;
+    }
+    return predictions;
+  } catch (error) {
+    console.log(`error`, error);
   }
-  return predictions;
 }
 
 export {
