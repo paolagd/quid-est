@@ -25,6 +25,8 @@ function PhotoResults(props) {
   const language = props.location.language;
   const documentId = props.location.documentId;
 
+  let translationReference = '(Translation API error)';
+
   const selectFirstTranslation = () => {
     setSourceWord(predictions[0].className);
     setTranslatedWord(translation1);
@@ -74,6 +76,20 @@ function PhotoResults(props) {
       translate(predictions[2].className, language || 'es', setTranslation3);
     }
   }, [predictions]);
+
+  useEffect(() => {
+    if (translation1 !== '' && translation1 !== translationReference) {
+      // Prevent an infinite loop.
+      translationReference = translation1;
+      selectFirstTranslation();
+    }
+  },[translation1]);
+
+  useEffect(() => {
+    if(translatedWord !== null) {
+      saveSelectionsToFirestore();
+    }
+  },[translatedWord]);
 
   return (
     <div id="content">
