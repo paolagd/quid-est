@@ -5,4 +5,9 @@
   padding: 1rem;
   width: 14rem;
   font-size: 15px;
+  cursor: pointer;
+}
+
+.file-input {
+  display: none;
 }
