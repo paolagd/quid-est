@@ -5,15 +5,10 @@ export default function SideBarItem(props) {
 
   return (
     <li className="nav-item"> 
-      <Link className="nav-link" to={url}>
- 
+      <Link className="nav-link" to={url}> 
         <i className={i}></i>
         <span>{title}</span>
-      </Link>
-      {/* <a className="nav-link" href="index.html">
-        <i className={i}></i>
-        <span>{title}</span>
-      </a> */}
+      </Link> 
     </li>
   );
 }

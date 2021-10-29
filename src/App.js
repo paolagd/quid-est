@@ -53,7 +53,8 @@ function App() {
           <Route path="/">
 
             <div id="wrapper">
-              <SideBar />
+
+              <SideBar language={language}/> 
               <div className="d-flex flex-column" id="content-wrapper">
                 <div id="content">
                   <TopBar user={user} logout={logoutUser} language={language} setLanguage={setLanguage} />

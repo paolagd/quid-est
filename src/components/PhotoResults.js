@@ -68,7 +68,7 @@ function PhotoResults(props) {
     preds = await mlBurst(imgRef.current);
     console.log("preds", preds);
     setPredictions(preds);
-  }, []);
+  }, [imgUrl]);
 
   // after the predictions are obtained, translate them
   useEffect(() => {
