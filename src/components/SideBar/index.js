@@ -56,7 +56,7 @@ export default function SideBar(props) {
             </div>
           </li>
           {/* <SideBarItem title="What is this?" icon="fa-images" url="/newSearch"/> */}
-          <SideBarItem title="History" icon="fa-history" url="/myDictionary"/>
+          <SideBarItem title="My Dictionary" icon="fa-book" url="/myDictionary"/>
           <SideBarItem title="Translate" icon="fa-language" url="/translate"/>
           <SideBarItem title="Quiz me!" icon="fa-diagnoses" url="/quiz"/>  
         </ul>
