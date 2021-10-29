@@ -1,27 +1,29 @@
 import SideBarItem from "./SideBarItem";
-import './SideBar.css';
+import { Link } from "react-router-dom";
+import "./SideBar.css";
 
 export default function SideBar() {
   return (
     <nav className="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-      <div className="container-fluid d-flex flex-column p-0">
-        <a
-          className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
-          href="#"
-        >
+      <div className="container-fluid d-flex flex-column p-0"> 
+        <Link className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" to="/">
           <div className="sidebar-brand-icon rotate-n-15">
             <i className="fas fa-camera-retro"></i>
           </div>
           <div className="sidebar-brand-text mx-3">
             <span>Quid-EST</span>
           </div>
-        </a>
+        </Link>
         <hr className="sidebar-divider my-0" />
-        <ul className="navbar-nav text-light" id="accordionSidebar"> 
-          <SideBarItem title="What is this?" icon="fa-images" url="/newSearch"/>
-          <SideBarItem title="History" icon="fa-history" url="/myDictionary"/>
-          <SideBarItem title="Translate" icon="fa-language" url="/translate"/>
-          <SideBarItem title="Quiz me!" icon="fa-diagnoses" url="/quiz"/> 
+        <ul className="navbar-nav text-light" id="accordionSidebar">
+          <SideBarItem
+            title="What is this?"
+            icon="fa-images"
+            url="/newSearch"
+          />
+          <SideBarItem title="History" icon="fa-history" url="/myDictionary" />
+          <SideBarItem title="Translate" icon="fa-language" url="/translate" />
+          <SideBarItem title="Quiz me!" icon="fa-diagnoses" url="/quiz" />
         </ul>
         <div className="text-center d-none d-md-inline">
           <button
