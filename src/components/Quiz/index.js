@@ -106,18 +106,18 @@ export default function Quiz() {
       <div className="header">
         {quizOver && userAnswers.length < TOTAL_QUESTIONS && (
           <>
-            <h3>What are quizzes for?</h3>
+            <h4>What are quizzes for?</h4>
             <hr />
-            <h5>
+            <h6>
               A quiz is just an opportunity to review again some of the words
               you have searched in the past.
-            </h5>
-            <h5>
+            </h6>
+            <h6>
               Do not panic! We will keep it simple and you can come back to is
               as many times as you need.
-            </h5>
+            </h6>
             <hr />
-            <h4>Select difficulty level:</h4>
+            <h5>Select difficulty level:</h5>
             <select
               value={quizDifficulty}
               className="btn dropdown-toggle"

@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, logout } from "../utils/firebase";
-import SideBar from "./SideBar/SideBar";
-import TopBar from "./TopBar";
+import { auth, logout } from "../utils/firebase"; 
 import { uploadImage } from "../utils/firebase";
 
 import './NewPhotoOptions.css';

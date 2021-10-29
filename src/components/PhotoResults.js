@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, logout, db } from "../utils/firebase";
-import SideBar from "./SideBar/SideBar";
-import TopBar from "./TopBar";
+import { auth, logout, db } from "../utils/firebase"; 
 import { classify, loadModel, parsePercent, mlBurst } from "../utils/ts-classify";
 import { translate } from "../utils/translate";
 import { doc, setDoc } from "firebase/firestore";
