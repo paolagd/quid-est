@@ -11,7 +11,7 @@ export default function DictionaryItem(props) {
   };
 
   return (
-    <div className="col-xl-3 col-lg-4 col-md-6 mb-4">
+    <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4">
       <div className="bg-white rounded shadow-sm">
         <img
           src={imageURL}
