@@ -31,3 +31,14 @@ p.hero-subtitle {
   margin-top: -24px;
   padding: 0;
 }
+
+/*  Gallery  */
+
+.p-3 p{
+  margin: 0;
+}
+
+.img-fluid {
+  height: 150px; 
+  object-fit: cover;
+}
