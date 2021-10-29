@@ -106,6 +106,15 @@ const resetPassword = (email) => {
     .then(() => { console.log("password reset email sent") });
 };
 
+const updateUserDoc = async ({ uid, language }) => {
+  console.log("updating user");
+  console.log(`user.uid`, uid)
+  const userRef = doc(db, "users", uid);
+  if (language) {
+    await updateDoc(userRef, { language });
+  }
+}
+
 const uploadImage = async (userID, file) => {
   // create a reference in storage & upload file
   try {
@@ -220,10 +229,10 @@ export {
   logout,
   loginWithGoogle,
   resetPassword,
+  updateUserDoc,
   storage,
   uploadImage,
   getUserDictionary,
   updateWordDifficulty,
   deleteItem,
-
 };
