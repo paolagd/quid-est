@@ -7,3 +7,8 @@
   width: 100%;
   display: flex;
 }
+
+.translation-button:focus {
+  background-color: #4e73df;
+  color: white;
+}
