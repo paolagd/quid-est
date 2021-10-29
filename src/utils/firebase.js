@@ -15,6 +15,7 @@ import {
   addDoc,
   setDoc,
   updateDoc,
+  getDoc,
   deleteDoc,
   doc,
   query,
@@ -112,6 +113,18 @@ const updateUserDoc = async ({ uid, language }) => {
   const userRef = doc(db, "users", uid);
   if (language) {
     await updateDoc(userRef, { language });
+  }
+}
+
+const getUserData = async (uid) => {
+  const docRef = doc(db, "users", uid);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    console.log("document not found");
+    return null;
   }
 }
 
@@ -230,6 +243,7 @@ export {
   loginWithGoogle,
   resetPassword,
   updateUserDoc,
+  getUserData,
   storage,
   uploadImage,
   getUserDictionary,
