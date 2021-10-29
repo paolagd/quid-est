@@ -13,19 +13,20 @@ import './PhotoResults.css';
 function PhotoResults(props) {
   const [user, loading, error] = useAuthState(auth);
   const [model, setModel] = useState(null);
+  const [savedFirstResult, setSavedFirstResult] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [translation1, setTranslation1] = useState('');
   const [translation2, setTranslation2] = useState('');
   const [translation3, setTranslation3] = useState('');
   const [sourceWord, setSourceWord] = useState(null);
   const [translatedWord, setTranslatedWord] = useState(null);
+  const [saveVisible, setSaveVisible] = useState(false);
   const history = useHistory();
   const imgRef = useRef();
   const imgUrl = props.location.imgUrl;
   const language = props.location.language;
   const documentId = props.location.documentId;
 
-  let translationReference = '(Translation API error)';
 
   const selectFirstTranslation = () => {
     setSourceWord(predictions[0].className);
@@ -49,15 +50,19 @@ function PhotoResults(props) {
     setDoc(docRef, { sourceWord, translatedWord, languageTo: language }, { merge: true });
   }
 
+  const clickedSaveSelections = () => {
+    // alert(`Saved!\n${sourceWord} = ${translatedWord}`);
+    setSaveVisible(true);
+    saveSelectionsToFirestore();
+  }
+
   useEffect(() => {
     if (loading) return;
     if (error) console.log(error);
     if (!user) history.replace("/login");
   }, [user, loading, error, history]);
 
-  // 
-  // following two useEffects are for obtaining the predictions and for translations
-  // 
+  
   // when component loads, get the predictions from the tensorflow mobilenet model
   useEffect(async () => {
     console.log(`img`, imgRef.current);
@@ -77,19 +82,29 @@ function PhotoResults(props) {
     }
   }, [predictions]);
 
+  // Once the first translation loads, select it automatically.
   useEffect(() => {
-    if (translation1 !== '' && translation1 !== translationReference) {
-      // Prevent an infinite loop.
-      translationReference = translation1;
+    if (translation1 !== '') {
       selectFirstTranslation();
     }
   },[translation1]);
 
+  // The first time a translation is selected (above), save that default value to DB.
   useEffect(() => {
-    if(translatedWord !== null) {
+    if(translatedWord !== null && !savedFirstResult) {
+      setSavedFirstResult(true);
       saveSelectionsToFirestore();
     }
   },[translatedWord]);
+
+  // Show the "Saved!" message for 1.5 sec after saving:
+  useEffect(() => {
+    if (saveVisible) {
+      setTimeout(() => {
+        setSaveVisible(false)
+      }, 1500);
+    };
+  }, [saveVisible]);
 
   return (
     <div id="content">
@@ -112,7 +127,7 @@ function PhotoResults(props) {
                   </div>
                   <div className="card-body classify-results">
                     <div className="row">
-                      <button type="button" className="btn btn-outline-primary" onClick={selectFirstTranslation}>
+                      <button type="button" className="btn btn-outline-primary translation-button shadow-none" onClick={selectFirstTranslation}>
                         <div className="col">
                           {predictions[0] && predictions[0].className}<br />
                           <small>{predictions[0] && parsePercent(predictions[0].probability)}% confidence</small>
@@ -123,7 +138,7 @@ function PhotoResults(props) {
                       </button>
                     </div>
                     <div className="row">
-                      <button type="button" className="btn btn-outline-primary" onClick={selectSecondTranslation}>
+                      <button type="button" className="btn btn-outline-primary translation-button shadow-none" onClick={selectSecondTranslation}>
                         <div className="col">
                           {predictions[1] && predictions[1].className}<br />
                           <small>{predictions[1] && parsePercent(predictions[1].probability)}% confidence</small>
@@ -134,7 +149,7 @@ function PhotoResults(props) {
                       </button>
                     </div>
                     <div className="row">
-                      <button type="button" className="btn btn-outline-primary" onClick={selectThirdTranslation}>
+                      <button type="button" className="btn btn-outline-primary translation-button shadow-none" onClick={selectThirdTranslation}>
                         <div className="col">
                           {predictions[2] && predictions[2].className}<br />
                           <small>{predictions[2] && parsePercent(predictions[2].probability)}% confidence</small>
@@ -144,10 +159,13 @@ function PhotoResults(props) {
                         </div>
                       </button>
                     </div>
-                    <div className="mb-3"><button className="btn btn-primary btn-sm" type="button" onClick={saveSelectionsToFirestore} >Save to Dictionary</button></div>
+                    <br />
+                    <div className="mb-3 save-container">
+                      <button className="btn btn-primary btn-sm" type="button" onClick={clickedSaveSelections} >Save to Dictionary</button>
+                      {saveVisible && <p className="saved-confirmation-alert">Saved! {sourceWord} = {translatedWord}</p>}
+                    </div>
                   </div>
                 </div>
-                <div className="card shadow"></div>
               </div>
             </div>
           </div>
