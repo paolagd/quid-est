@@ -20,6 +20,7 @@ function PhotoResults(props) {
   const [translation3, setTranslation3] = useState('');
   const [sourceWord, setSourceWord] = useState(null);
   const [translatedWord, setTranslatedWord] = useState(null);
+  const [saveVisible, setSaveVisible] = useState(false);
   const history = useHistory();
   const imgRef = useRef();
   const imgUrl = props.location.imgUrl;
@@ -50,7 +51,8 @@ function PhotoResults(props) {
   }
 
   const clickedSaveSelections = () => {
-    alert(`Saved!\n${sourceWord} = ${translatedWord}`);
+    // alert(`Saved!\n${sourceWord} = ${translatedWord}`);
+    setSaveVisible(true);
     saveSelectionsToFirestore();
   }
 
@@ -94,6 +96,15 @@ function PhotoResults(props) {
       saveSelectionsToFirestore();
     }
   },[translatedWord]);
+
+  // Show the "Saved!" message for 1.5 sec after saving:
+  useEffect(() => {
+    if (saveVisible) {
+      setTimeout(() => {
+        setSaveVisible(false)
+      }, 1500);
+    };
+  }, [saveVisible]);
 
   return (
     <div id="content">
@@ -149,9 +160,10 @@ function PhotoResults(props) {
                       </button>
                     </div>
                     <br />
-                    <div className="mb-3">
+                    <div className="mb-3 save-container">
                       <button className="btn btn-primary btn-sm" type="button" onClick={clickedSaveSelections} >Save to Dictionary</button>
-                      </div>
+                      {saveVisible && <p className="saved-confirmation-alert">Saved! {sourceWord} = {translatedWord}</p>}
+                    </div>
                   </div>
                 </div>
               </div>

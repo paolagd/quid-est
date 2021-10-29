@@ -12,3 +12,15 @@
   background-color: #4e73df;
   color: white;
 }
+
+.save-container {
+  display: flex;
+
+}
+
+.saved-confirmation-alert {
+  margin-left: 1em;
+  margin-bottom: 0;
+  padding-top: 0.1em;
+  color: green;
+}
