@@ -6,11 +6,11 @@ import { resetPassword } from '../utils/firebase';
 function Reset() {
   const [email, setEmail] = useState("");
 
-  const resetUserPassword = () => {
-    resetPassword();
+  const resetUserPassword = (e) => {
+    resetPassword(email);
     setEmail("");
   }
-  
+
   return (
     <div className="reset">
       <div className="reset__container">

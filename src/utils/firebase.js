@@ -4,6 +4,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  signInWithPopup,
+  signInWithRedirect,
+  GoogleAuthProvider,
   sendPasswordResetEmail,
 } from "firebase/auth";
 import {
@@ -90,19 +93,20 @@ const logout = async () => {
   }
 };
 
+const provider = new GoogleAuthProvider();
 const loginWithGoogle = () => {
   console.log("TODO: this functionality is not yet implemented");
+  // below pattern is not working, react app refreshes when signing in with pop-up or with redirect
+  // signInWithRedirect(auth, provider).then(() => { console.log("signed in with redirect") });
 };
 
 const resetPassword = (email) => {
-  try {
-    console.log("TODO: this functionality is not yet implemented");
-  } catch (error) {
-    console.log("error while sending password reset email: ", error.message);
-  }
+  console.log(`email`, email);
+  sendPasswordResetEmail(auth, email)
+    .then(() => { console.log("password reset email sent") });
 };
 
-const uploadImage = async (userID, file) => { 
+const uploadImage = async (userID, file) => {
   // create a reference in storage & upload file
   try {
     const storageRef = ref(storage, `users/${userID}/${file.name}`);
@@ -169,7 +173,7 @@ const deleteItem = async (uid, documentID) => {
 };
 
 
- 
+
 const getUserDictionary = async (userID, quizDifficulty) => {
   let dictionary = [];
   let q;
@@ -186,7 +190,7 @@ const getUserDictionary = async (userID, quizDifficulty) => {
     }
 
     const querySnapshot = await getDocs(q);
- 
+
     querySnapshot.forEach((doc) => {
       const dataObject = doc.data();
       dictionary.push({ ...dataObject, docId: doc.id });
@@ -197,11 +201,11 @@ const getUserDictionary = async (userID, quizDifficulty) => {
 
   return dictionary;
 };
- 
+
 const updateWordDifficulty = async (docID, difficulty) => {
   try {
     const wordRef = doc(db, "things", docID);
-    setDoc(wordRef, { difficultyFlag: difficulty }, { merge: true }); 
+    setDoc(wordRef, { difficultyFlag: difficulty }, { merge: true });
   } catch (e) {
     console.error("Error occured while writing document: ", e);
   }
