@@ -10,7 +10,7 @@ function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [galleryItems, setGalleryItems] = useState([]);
   const history = useHistory();
-
+ 
   useEffect(() => {
     if (loading) return;
     if (error) console.log(error);

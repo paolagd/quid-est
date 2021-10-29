@@ -1,5 +1,15 @@
 export default function DictionaryItem(props) {
   const { imageURL, sourceWord, translatedWord, language } = props;
+ 
+  const languageIcons = {
+    en: '🇬🇧',
+    es: '🇪🇸',
+    fr: '🇫🇷',
+    hi: '🇮🇳',
+    pt: '🇵🇹',
+    zh: '🇨🇳'
+  };
+
   return (
     <div className="col-xl-3 col-lg-4 col-md-6 mb-4">
       <div className="bg-white rounded shadow-sm">
@@ -14,7 +24,7 @@ export default function DictionaryItem(props) {
             {sourceWord}
           </p> 
           <hr/>
-          <p>en to {language}</p>
+          <p>{languageIcons.en} to {languageIcons[language]}</p>
         </div>
       </div>
     </div>
