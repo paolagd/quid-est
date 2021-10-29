@@ -1,3 +1,6 @@
+import { updateUserDoc } from "../utils/firebase";
+import { useParams } from "react-router";
+
 export default function TopBar(props) {
   const { user, logout, language, setLanguage } = props;
 
@@ -7,6 +10,11 @@ export default function TopBar(props) {
     hi: '🇮🇳',
     pt: '🇵🇹',
     zh: '🇨🇳'
+  };
+
+  const setUserLanguage = (language) => {
+    setLanguage(language);
+    updateUserDoc({ uid: user.uid, language });
   };
 
   return (
@@ -25,12 +33,12 @@ export default function TopBar(props) {
             <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               {languageIcons[language]}
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"> 
               <li><a class="dropdown-item" onClick={() => setLanguage('es')}>🇪🇸 (es) Spanish</a></li>
               <li><a class="dropdown-item" onClick={() => setLanguage('fr')}>🇫🇷 (fr) French</a></li>
               <li><a class="dropdown-item" onClick={() => setLanguage('hi')}>🇮🇳 (hi) Hindi</a></li>
               <li><a class="dropdown-item" onClick={() => setLanguage('pt')}>🇵🇹 (pt) Portuguese</a></li>
-              <li><a class="dropdown-item" onClick={() => setLanguage('zh')}>🇨🇳 (zh) Chinese</a></li>
+              <li><a class="dropdown-item" onClick={() => setLanguage('zh')}>🇨🇳 (zh) Chinese</a></li> 
             </ul>
           </div>
         </div>

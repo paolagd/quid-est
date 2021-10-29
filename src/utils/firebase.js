@@ -13,6 +13,7 @@ import {
   addDoc,
   setDoc,
   updateDoc,
+  getDoc,
   deleteDoc,
   doc,
   query,
@@ -105,6 +106,27 @@ const resetPassword = (email) => {
     console.log("password reset email sent");
   });
 };
+
+const updateUserDoc = async ({ uid, language }) => {
+  console.log("updating user");
+  console.log(`user.uid`, uid)
+  const userRef = doc(db, "users", uid);
+  if (language) {
+    await updateDoc(userRef, { language });
+  }
+}
+
+const getUserData = async (uid) => {
+  const docRef = doc(db, "users", uid);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    console.log("document not found");
+    return null;
+  }
+}
 
 const uploadImage = async (userID, file) => {
   // create a reference in storage & upload file
@@ -225,6 +247,8 @@ export {
   logout,
   loginWithGoogle,
   resetPassword,
+  updateUserDoc,
+  getUserData,
   storage,
   uploadImage,
   getUserDictionary,
