@@ -1,24 +1,30 @@
 div.jumbotron.hero-photography {
-  color: #fff;
-  text-align: center; 
+  color: #fff; 
   font-family: 'Quicksand', sans-serif;
   background-size: cover;
   background-position: center;
   padding-top: 100px;
   padding-bottom: 100px;    
   margin-left: -1px;
-  margin-right: -1px;
+  margin-right: -1px; 
+  display: flex;
+  align-content: flex-start;
+  flex-direction: column;
+}
+
+.hero-text{
+  margin-left: 3vh;
 }
 
 h1.hero-title, h2.hero-title, h3.hero-title {
   text-shadow: 0 3px 3px rgba(0,0,0,0.4);
-  color: #fff;
+  color: #fff; 
 }
 
 p.hero-subtitle {
-  max-width: 600px;
-  margin: 25px auto;
+  max-width: 600px; 
   color: #fff;
+  font-weight: bold;
 }
 
 #dashboard{
