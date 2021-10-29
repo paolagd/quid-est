@@ -28,8 +28,7 @@ function Dashboard() {
           <p className="hero-subtitle">
             Qued-est helps you find out how to say anything in any language!
           </p>
-          <p className="hero-subtitle">
-            {" "}
+          <p className="hero-subtitle"> 
             You just need to upload a photo of the object and review the
             available translations!
           </p>
@@ -129,33 +128,7 @@ function Dashboard() {
                 </div>
               </div>
             </div> 
- 
-            <div className="col-xl-3 col-lg-4 col-md-6 mb-4">
-              <div className="bg-white rounded shadow-sm"><img src="https://res.cloudinary.com/mhmd/image/upload/v1556294928/nicole-honeywill-546848-unsplash_ymprvp.jpg" alt="" className="img-fluid card-img-top"/>
-                <div className="p-4">
-                  <h5> <a href="#" className="text-dark">Lorem ipsum dolor</a></h5>
-                  <p className="small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                  <div className="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
-                    <p className="small mb-0"><i className="fa fa-picture-o mr-2"></i><span className="font-weight-bold">JPG</span></p>
-                    <div className="badge badge-warning px-3 rounded-pill font-weight-normal text-white">Featured</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-xl-3 col-lg-4 col-md-6 mb-4">
-              <div className="bg-white rounded shadow-sm"><img src="https://res.cloudinary.com/mhmd/image/upload/v1556294927/dose-juice-1184444-unsplash_bmbutn.jpg" alt="" className="img-fluid card-img-top"/>
-                <div className="p-4">
-                  <h5> <a href="#" className="text-dark">Lorem ipsum dolor</a></h5>
-                  <p className="small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                  <div className="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
-                    <p className="small mb-0"><i className="fa fa-picture-o mr-2"></i><span className="font-weight-bold">JPEG</span></p>
-                    <div className="badge badge-success px-3 rounded-pill font-weight-normal">Hot</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+   
           </div>
           <div className="py-5 text-right"><a href="#" className="btn btn-dark px-5 py-3 text-uppercase">Show me more</a></div>
         </div>

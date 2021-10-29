@@ -175,7 +175,7 @@ const deleteItem = async (uid, documentID) => {
 
 
 
-const getUserDictionary = async (userID, quizDifficulty) => {
+const getUserDictionary = async (userID, quizDifficulty = "All") => {
   let dictionary = [];
   let q;
 
