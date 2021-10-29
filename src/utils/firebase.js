@@ -3,9 +3,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
-  signInWithPopup,
-  signInWithRedirect,
+  signOut, 
   GoogleAuthProvider,
   sendPasswordResetEmail,
 } from "firebase/auth";
@@ -20,6 +18,7 @@ import {
   query,
   where,
   getDocs,
+  orderBy,
 } from "firebase/firestore";
 import {
   getStorage,
@@ -102,8 +101,9 @@ const loginWithGoogle = () => {
 
 const resetPassword = (email) => {
   console.log(`email`, email);
-  sendPasswordResetEmail(auth, email)
-    .then(() => { console.log("password reset email sent") });
+  sendPasswordResetEmail(auth, email).then(() => {
+    console.log("password reset email sent");
+  });
 };
 
 const uploadImage = async (userID, file) => {
@@ -123,7 +123,7 @@ const uploadImage = async (userID, file) => {
   console.log("download url:", downloadURL);
 
   let documentId = null;
-  // add a document in db which contains the user_id and downloadURL for the thing 
+  // add a document in db which contains the user_id and downloadURL for the thing
   try {
     // add a document in db for this thing
     const docRef = await addDoc(collection(db, "things"), {
@@ -140,7 +140,9 @@ const uploadImage = async (userID, file) => {
     // create a reference in storage & upload file
     const storageref = ref(storage, `users/${userID}/${documentId}`);
     await uploadBytes(storageref, file);
-    console.log(`uploaded file to storage at path: users/${userID}/${documentId}`);
+    console.log(
+      `uploaded file to storage at path: users/${userID}/${documentId}`
+    );
 
     // obtain the download url for the image
     const downloadURL = await getDownloadURL(
@@ -179,12 +181,17 @@ const getUserDictionary = async (userID, quizDifficulty = "All") => {
 
   try {
     if (quizDifficulty === "All")
-      q = query(collection(db, "things"), where("userID", "==", userID));
+      q = query(
+        collection(db, "things"),
+        where("userID", "==", userID),
+        orderBy("timestamp", "desc")
+      );
     else {
       q = query(
         collection(db, "things"),
         where("userID", "==", userID),
-        where("difficultyFlag", "==", quizDifficulty)
+        where("difficultyFlag", "==", quizDifficulty),
+        orderBy("timestamp", "desc")
       );
     }
 
@@ -223,5 +230,4 @@ export {
   getUserDictionary,
   updateWordDifficulty,
   deleteItem,
-
 };
