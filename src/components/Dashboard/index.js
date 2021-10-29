@@ -35,17 +35,16 @@ function Dashboard() {
       <div
         className="bg-light border border-light hero-photography jumbotron layer"
         style={{
-          backgroundImage: "url('assets/img/hero-background-photography.jpg')",
+          backgroundImage: "url('assets/img/hero-background-photography3.jpg')",
         }}
       >
         <div className="hero-text">
-          <h1 className="hero-title">Qued-est?</h1>
+          <h1 className="hero-title">What am I looking at?</h1>
           <p className="hero-subtitle">
-            Qued-est helps you find out how to say anything in any language!
+            Found a cool thing but you don't know how to call it?
           </p>
           <p className="hero-subtitle">
-            You just need to upload a photo of the object and review the
-            available translations!
+            Let us do the work for you.
           </p>
           <p>
             <a
@@ -53,7 +52,7 @@ function Dashboard() {
               role="button"
               href="/"
             >
-              Take a photo
+              Take a picture
             </a>
           </p>
         </div>

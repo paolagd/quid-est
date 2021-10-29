@@ -1,15 +1,16 @@
 div.jumbotron.hero-photography {
-  color: #fff; 
+  color: #fff;
   font-family: 'Quicksand', sans-serif;
   background-size: cover;
   background-position: center;
   padding-top: 100px;
-  padding-bottom: 100px;    
+  padding-bottom: 100px;
   margin-left: -1px;
-  margin-right: -1px; 
-  display: flex;
-  align-content: flex-start;
+  margin-right: -1px;
+  display: flex; 
   flex-direction: column;
+  text-align: center;
+  align-items: center;
 }
 
 .hero-text{
@@ -25,6 +26,7 @@ p.hero-subtitle {
   max-width: 600px; 
   color: #fff;
   font-weight: bold;
+  text-shadow: 2px 2px #35383e;
 }
 
 #dashboard{
@@ -39,10 +41,11 @@ p.hero-subtitle {
 }
 
 .img-fluid {
-  height: 150px; 
+  height: 25vh; 
   object-fit: cover;
 }
 
 .dashboard-traslation{ 
   color: #4e73df !important;
 }
+ 

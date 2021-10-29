@@ -17,7 +17,7 @@ import Dictionary from './components/Dictionary/Dictionary';
 import AlternateDictionary from './components/AlternateDictionary/AlternateDictionary';
 
 function App() {
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const [language, setLanguage] = useState('es');
 
   const logoutUser = () => {
