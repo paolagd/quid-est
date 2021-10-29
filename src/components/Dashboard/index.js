@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, getUserDictionary } from "../../utils/firebase";
 
@@ -65,10 +65,10 @@ function Dashboard() {
       <div className="container-fluid">
         <div className="px-lg-5">
           <div className="row"> {gallery}</div>
-          <div className="py-5 text-right">
-            <a href="#" className="btn btn-dark px-5 py-3 text-uppercase">
-              Show me more
-            </a>
+          <div className="text-right">
+            <Link to="/myDictionary" className="btn btn-dark px-5 py-3 text-uppercase">
+              Go to Dictionary
+            </Link>
           </div>
         </div>
       </div>

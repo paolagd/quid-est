@@ -9,7 +9,7 @@ export default function DictionaryItem(props) {
           className="img-fluid card-img-top"
         />
         <div className="p-3">
-          <h5 className="text-dark">{translatedWord}</h5>
+          <h5 className="text-dark dashboard-traslation">{translatedWord}</h5>
           <p className="small text-muted mb-0">
             {sourceWord}
           </p> 

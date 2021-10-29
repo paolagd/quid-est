@@ -42,3 +42,7 @@ p.hero-subtitle {
   height: 150px; 
   object-fit: cover;
 }
+
+.dashboard-traslation{ 
+  color: #4e73df !important;
+}
