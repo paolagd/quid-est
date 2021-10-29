@@ -50,10 +50,10 @@ export default function SideBar(props) {
             ref={fileInput}
           />
           <li className="nav-item"> 
-            <a className="nav-link" onClick={() => fileInput.current.click()}>
+            <div className="nav-link" onClick={() => fileInput.current.click()} >
               <i className="fas fa-images"></i>
               <span>What is this?</span>
-            </a>
+            </div>
           </li>
           {/* <SideBarItem title="What is this?" icon="fa-images" url="/newSearch"/> */}
           <SideBarItem title="History" icon="fa-history" url="/myDictionary"/>
