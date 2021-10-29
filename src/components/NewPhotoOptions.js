@@ -8,11 +8,12 @@ import { uploadImage } from "../utils/firebase";
 
 import './NewPhotoOptions.css';
 
-function NewPhotoOptions() {
+function NewPhotoOptions(props) {
   const [user, loading, error] = useAuthState(auth);
   const [imageURL, setImageURL] = useState("");
   const history = useHistory();
   const fileInput = useRef(null);
+  const { language } = props;
 
   useEffect(() => {
     if (loading) return;
@@ -29,7 +30,7 @@ function NewPhotoOptions() {
 
       history.push({
         pathname: '/results',
-        language: 'es',
+        language: language,
         imgUrl: downloadURL,
         documentId
       })

@@ -1,5 +1,6 @@
 import './App.css'; 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useState } from 'react';
 import Login from './components/Login';
 import Register from './components/Register';
 import Reset from './components/Reset';
@@ -16,7 +17,8 @@ import Dictionary from './components/Dictionary/Dictionary';
 import AlternateDictionary from './components/AlternateDictionary/AlternateDictionary';
 
 function App() {
-  const [user, loading, error] = useAuthState(auth); 
+  const [user, loading, error] = useAuthState(auth);
+  const [language, setLanguage] = useState('es'); 
 
   const logoutUser = () => {
     logout();
@@ -36,12 +38,12 @@ function App() {
               <SideBar/> 
               <div className="d-flex flex-column" id="content-wrapper">
                 <div id="content">
-                  <TopBar user={user} logout={logoutUser} />
+                  <TopBar user={user} logout={logoutUser} language={language} setLanguage={setLanguage}/>
 
                   <Route exact path="/" component={Dashboard} /> 
                   <Route exact path="/image" component={MainImage} />
                   <Route exact path="/quiz" component={Quiz} />
-                  <Route exact path="/newsearch" component={NewPhotoOptions} />
+                  <Route exact path="/newsearch"> <NewPhotoOptions language={language} /> </Route>
                   <Route exact path="/results" component={PhotoResults} /> 
                   <Route exact path="/mydictionary" component={Dictionary} /> 
                   <Route exact path="/mydictionary2" component={AlternateDictionary} /> 
