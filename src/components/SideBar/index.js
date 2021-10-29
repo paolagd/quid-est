@@ -1,9 +1,10 @@
-import SideBarItem from "./SideBarItem";
+import SideBarItem from "./SideBarItem"; 
+import { Link } from "react-router-dom"; 
 import { useRef, useState } from 'react';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router-dom";
 import { uploadImage, auth } from "../../utils/firebase";
-import './SideBar.css';
+import './SideBar.css'; 
 
 export default function SideBar(props) {
   const [user, loading, error] = useAuthState(auth);
@@ -30,19 +31,16 @@ export default function SideBar(props) {
 
   return (
     <nav className="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-      <div className="container-fluid d-flex flex-column p-0">
-        <a
-          className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
-          href="/"
-        >
+      <div className="container-fluid d-flex flex-column p-0"> 
+        <Link className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" to="/"> 
           <div className="sidebar-brand-icon rotate-n-15">
             <i className="fas fa-camera-retro"></i>
           </div>
           <div className="sidebar-brand-text mx-3">
             <span>Quid-EST</span>
           </div>
-        </a>
-        <hr className="sidebar-divider my-0" />
+        </Link>
+        <hr className="sidebar-divider my-0" /> 
         <ul className="navbar-nav text-light" id="accordionSidebar"> 
           <input className="file-input"
             type="file"
@@ -60,7 +58,7 @@ export default function SideBar(props) {
           {/* <SideBarItem title="What is this?" icon="fa-images" url="/newSearch"/> */}
           <SideBarItem title="History" icon="fa-history" url="/myDictionary"/>
           <SideBarItem title="Translate" icon="fa-language" url="/translate"/>
-          <SideBarItem title="Quiz me!" icon="fa-diagnoses" url="/quiz"/> 
+          <SideBarItem title="Quiz me!" icon="fa-diagnoses" url="/quiz"/>  
         </ul>
         <div className="text-center d-none d-md-inline">
           <button

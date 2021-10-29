@@ -17,7 +17,7 @@ export default function Quiz() {
   const [quizOver, setQuizOver] = useState(true);
   const [score, setScore] = useState(0);
   const [quizDifficulty, setQuizDifficulty] = useState("All");
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   //Resets quiz and retrieves user dictionary items for the questions
   const getThings = async () => {
