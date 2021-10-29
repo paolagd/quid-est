@@ -1,6 +1,14 @@
 export default function TopBar(props) {
-  const { user, logout } = props;
- 
+  const { user, logout, language, setLanguage } = props;
+
+  const languageIcons = {
+    es: '🇪🇸',
+    fr: '🇫🇷',
+    hi: '🇮🇳',
+    pt: '🇵🇹',
+    zh: '🇨🇳'
+  };
+
   return (
     <nav className="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
       <div className="container-fluid">
@@ -11,6 +19,21 @@ export default function TopBar(props) {
         >
           <i className="fas fa-bars"></i>
         </button>
+
+        <div>
+        <div class="dropdown">
+          <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            {languageIcons[language]}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" onClick={() => setLanguage('es')}>🇪🇸 (es) Spanish</a></li>
+            <li><a class="dropdown-item" onClick={() => setLanguage('fr')}>🇫🇷 (fr) French</a></li>
+            <li><a class="dropdown-item" onClick={() => setLanguage('hi')}>🇮🇳 (hi) Hindi</a></li>
+            <li><a class="dropdown-item" onClick={() => setLanguage('pt')}>🇵🇹 (pt) Portuguese</a></li>
+            <li><a class="dropdown-item" onClick={() => setLanguage('zh')}>🇨🇳 (zh) Chinese</a></li>
+          </ul>
+        </div>
+        </div>
 
         <ul className="navbar-nav flex-nowrap ms-auto">
           {/* notifications section */}
