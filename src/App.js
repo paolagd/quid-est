@@ -30,7 +30,7 @@ function App() {
     if (user) {
       const userData = await getUserData(user.uid);
       console.log(`userData`, userData);
-      if (userData.language) {
+      if (userData?.language) {
         setLanguage(userData.language);
       } else {
         setLanguage('es');
@@ -54,7 +54,7 @@ function App() {
 
             <div id="wrapper">
 
-              <SideBar language={language}/> 
+              <SideBar language={language} />
               <div className="d-flex flex-column" id="content-wrapper">
                 <div id="content">
                   <TopBar user={user} logout={logoutUser} language={language} setLanguage={setLanguage} />
