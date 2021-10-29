@@ -2,7 +2,7 @@ import { React, useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useHistory } from 'react-router-dom';
 import { auth, db, deleteItem } from '../../utils/firebase';
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, orderBy, getDocs } from "firebase/firestore";
 import DictionaryEntry from './DictionaryEntry';
 
 import './Dictionary.css';
@@ -17,12 +17,10 @@ function Dictionary() {
     if (loading) return;
     if (error) console.log(error);
     if (!user) history.replace('/login');
-
-
   }, [user, loading, error, history]);
 
   const getHistory = async () => {
-    const q = query(thingsRef, where("userID", "==", user.uid));
+    const q = query(thingsRef, where("userID", "==", user.uid), orderBy("timestamp", "desc"));
     const querySnapshot = await getDocs(q);
 
     const allDocs = []
