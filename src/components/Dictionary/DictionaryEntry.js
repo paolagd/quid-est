@@ -1,12 +1,19 @@
-import { React } from 'react';
-import { deleteItem } from '../../utils/firebase';
+import { React } from 'react'; 
 
 import './DictionaryEntry.css';
 
 function DictionaryEntry(props) {
 
-  const { uid, documentID, deleteThis } = props;
-
+  const { deleteThis } = props;
+  const languageIcons = {
+    en: '🇬🇧',
+    es: '🇪🇸',
+    fr: '🇫🇷',
+    hi: '🇮🇳',
+    pt: '🇵🇹',
+    zh: '🇨🇳'
+  };
+  
   return (
     <div className="col">
       <div className="card dictionary-card">
@@ -17,13 +24,13 @@ function DictionaryEntry(props) {
         </div>
         <div className="card-footer">
           <p className="card-text">
-            <small className="text-muted">{props.languageTo}</small>
+             {languageIcons.en} to {languageIcons[props.languageTo]} 
           </p>
           <p className="card-text">
             <button type="button"
               className="btn btn-danger btn-sm"
               onClick={deleteThis}
-            >Delete</button>
+            ><i className="fas fa-trash-alt"></i></button>
           </p>
         </div>
       </div>

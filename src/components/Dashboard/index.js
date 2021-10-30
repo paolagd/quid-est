@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, getUserDictionary } from "../../utils/firebase";
+import DictionaryItem from "./DictionaryItem"; 
+import "./Dashboard.css"; 
 
-import "./Dashboard.css";
-import DictionaryItem from "./DictionaryItem";
+export default function Dashboard(props) {
+  const { onFileChange } = props;
+  const fileInput = useRef(null);  
 
-function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [galleryItems, setGalleryItems] = useState([]);
   const history = useHistory();
@@ -48,14 +50,18 @@ function Dashboard() {
           <p className="hero-subtitle">
             Let us do the work for you.
           </p>
-          <p>
-            <a
-              className="btn btn-primary btn-lg hero-button"
-              role="button"
-              href="/"
-            >
-              Take a picture
-            </a>
+          <p> 
+            <input className="file-input"
+              type="file"
+              capture='camera'
+              accept=".png, .jpg, .jpeg"
+              onChange={(e) => onFileChange(e.target.files)}
+              ref={fileInput} hidden
+            /> 
+            <div className="btn btn-primary btn-lg hero-button" onClick={() => fileInput.current.click()} >
+              <i className="fas fa-camera"></i>
+              <span> Take a picture</span>
+            </div> 
           </p>
         </div>
       </div>
@@ -75,5 +81,4 @@ function Dashboard() {
       </div>
     </div>
   );
-}
-export default Dashboard;
+} 
