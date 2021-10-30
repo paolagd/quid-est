@@ -83,16 +83,16 @@ function Register() {
                     Register Account
                   </button>
                   <hr />
-                  <a
+                  {/* <a
                     className="btn btn-primary d-block btn-google btn-user w-100 mb-2"
                     role="button" href="/"
                   >
                     <i className="fab fa-google"></i>&nbsp; Register with Google
                   </a>
-                  <hr />
+                  <hr /> */}
                 </form>
                 <div className="text-center">
-                  <a className="small" href="forgot-password.html">
+                  <a className="small" href="/login">
                     Forgot Password?
                   </a>
                 </div>

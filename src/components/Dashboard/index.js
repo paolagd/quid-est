@@ -14,8 +14,11 @@ function Dashboard() {
   useEffect(() => {
     if (loading) return;
     if (error) console.log(error);
-    if (!user) history.replace("/login");
-    parseDictionary();
+    if (!user){
+      history.replace("/login");
+    }else{ 
+      parseDictionary();
+    } 
   }, [user, loading, error, history]);
 
   //Parses the latest 8 dictionary items for the user
@@ -24,8 +27,7 @@ function Dashboard() {
     const dictionaryItems = items.slice(0, 8);
     setGalleryItems(dictionaryItems);
   };
-
-  console.log(galleryItems)
+ 
   const gallery = galleryItems.map((item, index) => {
     return <DictionaryItem key={index} imageURL={item.downloadURL} sourceWord={item.sourceWord} translatedWord={item.translatedWord} language={item.languageTo}/>;
   });
