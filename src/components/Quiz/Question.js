@@ -12,7 +12,7 @@ export default function Question(props) {
   } = props;
 
   return (
-    <section className="question-card">
+    <section className="question-card"> 
       <div className="question-info">
         <div className="info">
           <div className="tag pink">
@@ -28,7 +28,7 @@ export default function Question(props) {
         <img src={imageURL} alt="questionimage" />
 
         <div className="card shadow mb-3">
-          <div className="card-header py-3">
+          <div className="card-header">
             <h4 className="text-primary m-0 fw-bold">{question}</h4>
           </div>
 

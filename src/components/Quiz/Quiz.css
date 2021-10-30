@@ -5,8 +5,7 @@
 } 
 
 .main-quiz-container .header{
-  height: 70px;
-  margin-top: 10px;
+  height: 50px; 
   display: flex;
   align-items: center;
   font-family: 'Quicksand', sans-serif;
@@ -84,17 +83,17 @@
 .question-card{
 	max-width: 30rem;
 	width: 30rem; 
-  height: 70vh; 
+  height: 63vh; 
+  min-height: 450px;
   position: relative;
   display: flex; 
   flex-direction: column;
-	
-	overflow: hidden;
+	justify-content: center; 
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); 
 }
 
 .question-card .question img{
-  max-width: 40vh;
+  max-width: 35vh;
   max-height:30vh;
   box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
   border-radius: 0.5rem;
@@ -113,12 +112,18 @@
 }
 
 .question-card .question .card{
-  margin-top: 2em;
+  margin-top: 10px;
 }
 
 /* Small devices */
 @media (max-width:  650px) {
   .question-card{
-    width: 350px;
+    width: 390px; 
+  } 
+ 
+  .question-card .question img{
+    max-width: 300px; 
+    box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+    border-radius: 0.5rem;
   } 
 }
