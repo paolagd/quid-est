@@ -140,9 +140,7 @@ export default function Quiz() {
 
         {!quizOver && <h3>You can do this!</h3>}
       </div>
-
-      {/* {quizOver && <p>Score: {score} </p>} */}
-
+ 
       {onLoading && <p>Loading questions ... </p>}
 
       {!quizOver && !onLoading && (
