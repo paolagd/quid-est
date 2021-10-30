@@ -24,18 +24,19 @@ function App() {
     logout();
   };
 
-  useEffect(async () => {
-    console.log("user has changed...");
-    console.log(`user`, user);
-    if (user) {
-      const userData = await getUserData(user.uid);
-      console.log(`userData`, userData);
-      if (userData?.language) {
-        setLanguage(userData.language);
-      } else {
-        setLanguage('es');
+  useEffect(() => {
+    async function loadData() { 
+      if (user) {
+        const userData = await getUserData(user.uid);
+        console.log(`userData`, userData);
+        if (userData?.language) {
+          setLanguage(userData.language);
+        } else {
+          setLanguage('es');
+        }
       }
     }
+    loadData();
   }, [user])
 
   useEffect(() => {

@@ -4,4 +4,9 @@
 
 .nav-link{
   cursor: pointer;
+} 
+
+.nav-link span{
+  font-size: 15px;
 }
+

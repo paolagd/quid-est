@@ -1,5 +1,5 @@
-import { updateUserDoc } from "../utils/firebase";
-import { useParams } from "react-router";
+import { updateUserDoc } from "../utils/firebase"; 
+import './TopBar.css';
 
 export default function TopBar(props) {
   const { user, logout, language, setLanguage } = props;
