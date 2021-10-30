@@ -1,33 +1,11 @@
 import SideBarItem from "./SideBarItem"; 
 import { Link } from "react-router-dom"; 
-import { useRef, useState } from 'react';
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useHistory } from "react-router-dom";
-import { uploadImage, auth } from "../../utils/firebase";
+import { useRef } from 'react'; 
 import './SideBar.css'; 
 
 export default function SideBar(props) {
-  const [user, loading, error] = useAuthState(auth);
-  const fileInput = useRef(null);
-  const language = props.language;
-  const history = useHistory();
-
-
-  const fileChange = async (files) => {
-    if (files[0]) {
-      console.log(files[0].name);
-      const { downloadURL, documentId } = await uploadImage(user.uid, files[0]);
-      console.log(downloadURL);
-      // setImageURL(downloadURL);
-
-      history.push({
-        pathname: '/results',
-        language: language,
-        imgUrl: downloadURL,
-        documentId
-      })
-    }
-  }
+  const { onFileChange } = props; 
+  const fileInput = useRef(null);  
 
   return (
     <nav className="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
@@ -46,7 +24,7 @@ export default function SideBar(props) {
             type="file"
             capture='camera'
             accept=".png, .jpg, .jpeg"
-            onChange={(e) => fileChange(e.target.files)}
+            onChange={(e) => onFileChange(e.target.files)}
             ref={fileInput}
           />
           <li className="nav-item"> 

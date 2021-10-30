@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -12,13 +12,15 @@ import PhotoResults from './components/PhotoResults';
 import SideBar from './components/SideBar/';
 import TopBar from './components/TopBar';
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, getUserData, logout } from "./utils/firebase";
+import { auth, getUserData, logout, uploadImage } from "./utils/firebase";
+
 import Dictionary from './components/Dictionary/Dictionary';
 import AlternateDictionary from './components/AlternateDictionary/AlternateDictionary';
 
 function App() {
   const [user] = useAuthState(auth);
-  const [language, setLanguage] = useState('es');
+  const [language, setLanguage] = useState('es'); 
+  const history = useHistory();
 
   const logoutUser = () => {
     logout();
@@ -38,14 +40,24 @@ function App() {
     }
     loadData();
   }, [user])
+  
+  const fileChange = async (files) => {
+    if (files[0]) {
+      console.log(files[0].name);
+      const { downloadURL, documentId } = await uploadImage(user.uid, files[0]);
+      console.log(downloadURL); 
 
-  useEffect(() => {
-    console.log(`language`, language);
-  }, [language]);
+      history.push({
+        pathname: '/results',
+        language: language,
+        imgUrl: downloadURL,
+        documentId
+      })
+    }
+  }
 
   return (
-    <div className="App">
-      <Router>
+    <div className="App"> 
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
@@ -55,12 +67,14 @@ function App() {
 
             <div id="wrapper">
 
-              <SideBar language={language} />
+              <SideBar language={language} onFileChange={fileChange}/>
               <div className="d-flex flex-column" id="content-wrapper">
                 <div id="content">
                   <TopBar user={user} logout={logoutUser} language={language} setLanguage={setLanguage} />
 
-                  <Route exact path="/" component={Dashboard} />
+                  <Route exact path="/">
+                    <Dashboard onFileChange={fileChange}/>
+                  </Route> 
                   <Route exact path="/image" component={MainImage} />
                   <Route exact path="/quiz" component={Quiz} />
                   <Route exact path="/newsearch"> <NewPhotoOptions language={language} /> </Route>
@@ -71,8 +85,7 @@ function App() {
               </div>
             </div>
           </Route>
-        </Switch>
-      </Router>
+        </Switch> 
     </div>
   );
 }
