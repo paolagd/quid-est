@@ -81,7 +81,7 @@ function Login() {
                 <div className="col-lg-6">
                   <div className="p-5">
                     <div className="text-center">
-                      <h4 className="text-dark mb-4">Welcome to Qued-est</h4>
+                      <h4 className="text-dark mb-4">Welcome to Quid-est</h4>
                     </div>
                     <form className="user">
                       <div className="mb-3">
