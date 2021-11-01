@@ -1,5 +1,6 @@
 import { useEffect, useState} from "react";
 import { updateWordDifficulty } from "../../utils/firebase";
+import { difficultyStyle } from "../../helpers/dictionary";
 
 export default function ResultsTableItem(props) {
   const {
@@ -28,17 +29,9 @@ export default function ResultsTableItem(props) {
   };
 
   useEffect(() => {
-    difficultyStyle(wordDifficulty); 
-  }, [wordDifficulty]);
-
-  const difficultyStyle = (currentDifficulty) => {
-    if (currentDifficulty === "Easy")
-      setDropdownClass("btn dropdown-toggle btn-success");
-    else if (currentDifficulty === "Medium")
-      setDropdownClass("btn dropdown-toggle btn-warning");
-    else if (currentDifficulty === "Hard")
-      setDropdownClass("btn dropdown-toggle btn-danger");
-  };
+    const style = difficultyStyle(wordDifficulty);
+    setDropdownClass(style);
+  }, [wordDifficulty]); 
 
   return (
     <tr>
