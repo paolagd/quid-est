@@ -1,4 +1,5 @@
 import "./Quiz.css";
+import { languageIcons } from "../../helpers/dictionary";
 
 export default function Question(props) {
   const {
@@ -8,11 +9,12 @@ export default function Question(props) {
     questionNumber,
     totalQuestions,
     imageURL,
-    score
+    score,
+    languageTo,
   } = props;
 
   return (
-    <section className="question-card"> 
+    <section className="question-card">
       <div className="question-info">
         <div className="info">
           <div className="tag pink">
@@ -21,7 +23,10 @@ export default function Question(props) {
           <p>Question</p>
         </div>
         <div className="info">
-          <div className="tag orange">{score} / {totalQuestions}</div><p>Score</p>
+          <div className="tag orange">
+            {score} / {totalQuestions}
+          </div>
+          <p>Score</p>
         </div>
       </div>
       <div className="question">
@@ -29,14 +34,14 @@ export default function Question(props) {
 
         <div className="card shadow mb-3">
           <div className="card-header">
-            <h4 className="text-primary m-0 fw-bold">{question}</h4>
+            <h4 className="text-primary m-0 fw-bold">{question} - <span>{languageIcons[languageTo]}</span></h4>   
           </div>
 
           <div className="card-body">
             <div className="row">
               <div className="col">
                 <div className="mb-3">
-                  <label className="form-label" >
+                  <label className="form-label">
                     <strong>What's the translation?</strong>
                   </label>
                   <input
@@ -52,6 +57,5 @@ export default function Question(props) {
         </div>
       </div>
     </section>
- 
   );
 }

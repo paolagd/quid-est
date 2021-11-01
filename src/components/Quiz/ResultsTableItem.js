@@ -1,6 +1,6 @@
 import { useEffect, useState} from "react";
 import { updateWordDifficulty } from "../../utils/firebase";
-import { difficultyStyle } from "../../helpers/dictionary";
+import { difficultyStyle, languageIcons } from "../../helpers/dictionary";
 
 export default function ResultsTableItem(props) {
   const {
@@ -46,7 +46,7 @@ export default function ResultsTableItem(props) {
       </td>
       <td>{sourceWord}</td>
       <td>{translatedWord}</td>
-      <td>{languageTo}</td> 
+      <td>{languageIcons[languageTo]}</td> 
       {userAnswerTd}
       <td>
         <select
