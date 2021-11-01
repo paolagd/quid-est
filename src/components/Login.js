@@ -9,7 +9,7 @@ function Login() {
   const history = useHistory();
   const [user, loading, error] = useAuthState(auth);
 
-  const loginUser = (e) => { 
+  const loginUser = (e) => {
     e.preventDefault();
     loginWithEmail(email, password);
     setEmail("");
@@ -25,7 +25,7 @@ function Login() {
     if (error) console.log(error);
     if (user) history.replace("/");
   });
- 
+
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -37,7 +37,7 @@ function Login() {
                   <div
                     className="flex-grow-1 bg-login-image"
                     style={{
-                      backgroundImage: "url(assets/img/dogs/image3.jpeg)",
+                      backgroundImage: "url(assets/img/dictionary.jpg)",
                     }}
                   ></div>
                 </div>
@@ -65,26 +65,12 @@ function Login() {
                           placeholder="Password"
                         />
                       </div>
-                      <div className="mb-3">
-                        <div className="custom-control custom-checkbox small">
-                          <div className="form-check">
-                            <input
-                              className="form-check-input custom-control-input"
-                              type="checkbox"
-                              id="formCheck-1"
-                            />
-                            <label
-                              className="form-check-label custom-control-label" 
-                            >
-                              Remember Me
-                            </label>
-                          </div>
-                        </div>
-                      </div>
                       <button
                         className="btn btn-primary d-block btn-user w-100"
                         type="submit"
-                        onClick={(e)=>{loginUser(e)}}
+                        onClick={(e) => {
+                          loginUser(e);
+                        }}
                       >
                         Login
                       </button>
@@ -97,12 +83,12 @@ function Login() {
                       </a>  */}
                     </form>
                     <div className="text-center">
-                      <a className="small" href="/login">
-                        Forgot Password?
-                      </a>
+                      <Link className="small" to="/reset">
+                        Forgot password?
+                      </Link>
                     </div>
-                    <div className="text-center"> 
-                      <Link className="small" to="/register"> 
+                    <div className="text-center">
+                      <Link className="small" to="/register">
                         Create an Account!
                       </Link>
                     </div>

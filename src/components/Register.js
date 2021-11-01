@@ -14,8 +14,8 @@ function Register() {
   const registerUser = (e) => {
     e.preventDefault();
     if (!name || !email || !password) {
-      alert("Please your information");  
-    }else{
+      alert("Please your information");
+    } else {
       register(name, email, password);
       setName("");
       setEmail("");
@@ -38,7 +38,7 @@ function Register() {
               <div
                 className="flex-grow-1 bg-register-image"
                 style={{
-                  backgroundImage: "url( assets/img/dogs/image2.jpeg )",
+                  backgroundImage: "url( assets/img/translation.jpg )",
                 }}
               ></div>
             </div>
@@ -92,12 +92,12 @@ function Register() {
                   <hr /> */}
                 </form>
                 <div className="text-center">
-                  <a className="small" href="/login">
-                    Forgot Password?
-                  </a>
+                  <Link className="small" to="/reset">
+                    Forgot password?
+                  </Link>
                 </div>
                 <div className="text-center">
-                  <Link className="small" to="/login"> 
+                  <Link className="small" to="/login">
                     Already have an account? Login!
                   </Link>
                 </div>
