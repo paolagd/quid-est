@@ -30,12 +30,10 @@ export default function SideBar(props) {
           <li className="nav-item"> 
             <div className="nav-link" onClick={() => fileInput.current.click()} >
               <i className="fas fa-camera"></i>
-              <span>Take a picure</span>
+              <span>Take a picture</span>
             </div>
-          </li>
-          {/* <SideBarItem title="What is this?" icon="fa-images" url="/newSearch"/> */}
-          <SideBarItem title="My Dictionary" icon="fa-book" url="/myDictionary"/>
-          <SideBarItem title="Translate" icon="fa-language" url="/translate"/>
+          </li> 
+          <SideBarItem title="My Dictionary" icon="fa-book" url="/myDictionary"/> 
           <SideBarItem title="Quiz me!" icon="fa-diagnoses" url="/quiz"/>  
         </ul>
         <div className="text-center d-none d-md-inline">

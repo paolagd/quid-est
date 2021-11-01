@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getUserDictionary, auth } from "../../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Question from "./Question";
 import Results from "./Results";
 import { shuffle } from "../../helpers/quiz";
+import { useHistory } from "react-router-dom";
 import "./Quiz.css";
 
 const TOTAL_QUESTIONS = 4;
@@ -16,9 +17,17 @@ export default function Quiz() {
   const [answer, setAnswer] = useState("");
   const [quizOver, setQuizOver] = useState(true);
   const [score, setScore] = useState(0);
-  const [quizDifficulty, setQuizDifficulty] = useState("All");
-  const [user] = useAuthState(auth);
+  const [quizDifficulty, setQuizDifficulty] = useState("All"); 
+  const [user, loading, error] = useAuthState(auth);
 
+  const history = useHistory();
+
+  useEffect(() => {
+    if (loading) return;
+    if (error) console.log(error);
+    if (!user) history.replace('/login');
+  }, [user, loading, error, history]);
+ 
   //Resets quiz and retrieves user dictionary items for the questions
   const getThings = async () => {
     setOnLoading(true);
