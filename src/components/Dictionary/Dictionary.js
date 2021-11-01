@@ -43,13 +43,16 @@ function Dictionary() {
     await deleteItem(uid, documentID);
     await getHistory();
   }
-
-  useEffect(async () => {
-    if (user) {
-      console.log("This is user.uid:");
-      console.log(user.uid);
-      await getHistory();
+  
+  useEffect(() => {
+    async function fetchHistory(){
+      if (user) {
+        console.log("This is user.uid:");
+        console.log(user.uid);
+        await getHistory();
+      }
     }
+    fetchHistory();     
   }, [user]);
 
   return (
@@ -59,9 +62,7 @@ function Dictionary() {
         {allEntries}
 
       </div>
-    </div>
-
-
+    </div> 
   )
 }
 
