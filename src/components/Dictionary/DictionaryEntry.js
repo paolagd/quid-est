@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { updateWordDifficulty } from "../../utils/firebase"; 
+import { updateWordDifficulty } from "../../utils/firebase";
+import { difficultyStyle , languageIcons} from "../../helpers/dictionary";
 import "./DictionaryEntry.css";
 
 function DictionaryEntry(props) {
@@ -10,41 +11,22 @@ function DictionaryEntry(props) {
     translatedWord,
     languageTo,
     downloadURL,
-    documentID
+    documentID,
   } = props;
-
-
 
   const [wordDifficulty, setWordDifficulty] = useState(difficultyFlag);
   const [dropdownClass, setDropdownClass] = useState("btn dropdown-toggle");
-
-  const languageIcons = {
-    en: "🇬🇧",
-    es: "🇪🇸",
-    fr: "🇫🇷",
-    hi: "🇮🇳",
-    pt: "🇵🇹",
-    zh: "🇨🇳",
-  };
-
-  const changeDifficulty = (e) => { 
-    setWordDifficulty(e.target.value);
-    console.log(documentID)
+ 
+  const changeDifficulty = (e) => {
+    setWordDifficulty(e.target.value); 
     updateWordDifficulty(documentID, e.target.value);
-  }; 
-  useEffect(() => {
-    difficultyStyle(wordDifficulty); 
-  }, [wordDifficulty]);
-
-  const difficultyStyle = (currentDifficulty) => {
-    if (currentDifficulty === "Easy")
-      setDropdownClass("btn btn-sm dropdown-toggle btn-success");
-    else if (currentDifficulty === "Medium")
-      setDropdownClass("btn btn-sm dropdown-toggle btn-warning");
-    else if (currentDifficulty === "Hard")
-      setDropdownClass("btn btn-sm dropdown-toggle btn-danger");
   };
 
+  useEffect(() => {
+    const style = difficultyStyle(wordDifficulty);
+    setDropdownClass(style);
+  }, [wordDifficulty]);
+ 
   return (
     <div className="col">
       <div className="card dictionary-card">
@@ -58,10 +40,8 @@ function DictionaryEntry(props) {
           <h5 className="card-text">{translatedWord}</h5>
         </div>
         <div className="card-footer">
-          <p className="card-text">
-            {languageIcons[languageTo]}
-          </p>
-          <select 
+          <p className="card-text">{languageIcons[languageTo]}</p>
+          <select
             value={wordDifficulty}
             className={dropdownClass}
             onChange={(e) => changeDifficulty(e)}

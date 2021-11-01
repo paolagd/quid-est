@@ -17,10 +17,6 @@
 .card-footer p {
   margin-bottom: 0;
 }
-
-.card-footer select{
-  width: 90px;
-}
  
 @media only screen and (max-width: 900px) and (min-width: 760px)   {
  
