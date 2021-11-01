@@ -24,8 +24,7 @@ function Dictionary() {
     const querySnapshot = await getDocs(q);
 
     const allDocs = []
-    querySnapshot.forEach((doc) => {
-      // {documentID: doc.id, ...doc.data()});});
+    querySnapshot.forEach((doc) => { 
       allDocs.push(
         <DictionaryEntry
           key={doc.id}
