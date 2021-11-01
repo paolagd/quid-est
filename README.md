@@ -1,5 +1,7 @@
 # Quid-Est?
-Ever found something cool while travelling and didn't know what to call it? Take it's photo; this app will translate that 'thing' in your photo into the local language. 
+Ever found something cool while travelling and didn't know what to call it? 
+
+This web app allows you to upload an image from your file system (or directly from your camera, if using a smartphone). It implements the TensorflowJS machine learning libraries to parse the contents of the image and provide its top three best guesses for the correct image label. It then translates the selected label into a language of your choice.
 
 ## Stack
 This project was initialized with [Create React App](https://github.com/facebook/create-react-app).
@@ -31,5 +33,5 @@ Styling and layout was done with [bootstrap](https://getbootstrap.com).
 ![Dashboard](./screenshots/Languages.png)
 ### View your previous images & translations
 ![Dashboard](./screenshots/History.png)
-### Dashboard
+### Quiz yourself on past searches
 ![Dashboard](./screenshots/Quiz.png)
