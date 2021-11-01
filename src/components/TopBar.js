@@ -1,4 +1,3 @@
-import { updateUserDoc } from "../utils/firebase"; 
 import './TopBar.css';
 
 export default function TopBar(props) {
@@ -11,12 +10,7 @@ export default function TopBar(props) {
     pt: '🇵🇹',
     zh: '🇨🇳'
   };
-
-  const setUserLanguage = (language) => {
-    setLanguage(language);
-    updateUserDoc({ uid: user.uid, language });
-  };
-
+ 
   return (
     <nav className="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
       <div className="container-fluid">
@@ -31,7 +25,7 @@ export default function TopBar(props) {
         <div>
           <div className="dropdown">
             <button className="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              {languageIcons[language]}
+              Translate to:  {languageIcons[language]}
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1"> 
               <li><div className="dropdown-item" onClick={() => setLanguage('es')}>🇪🇸 (es) Spanish</div></li>
@@ -102,6 +96,7 @@ export default function TopBar(props) {
                     <img
                       className="rounded-circle"
                       src="assets/img/avatars/avatar4.jpeg"
+                      alt="profile"
                     />
                     <div className="bg-success status-indicator"></div>
                   </div>
@@ -153,20 +148,16 @@ export default function TopBar(props) {
                   alt="profile-img"
                 />
               </a>
-              <div className="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                <a className="dropdown-item" href="#">
-                  <i className="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
-                  &nbsp;Profile
-                </a>
+              <div className="dropdown-menu shadow dropdown-menu-end animated--grow-in"> 
                 <a className="dropdown-item" href="#">
                   <i className="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>
                   &nbsp;Settings
                 </a>
                 <div className="dropdown-divider"></div>
-                <a className="dropdown-item" onClick={() => logout()}>
+                <div className="dropdown-item" onClick={() => logout()}>
                   <i className="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>
                   &nbsp;Logout
-                </a>
+                </div>
               </div>
             </div>
           </li>

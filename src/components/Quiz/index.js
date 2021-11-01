@@ -33,8 +33,7 @@ export default function Quiz() {
       setQuizOver(true);
       setOnLoading(false);
       return;
-    }
-    //TODO: proper error handling
+    } 
 
     setQuestions(shuffle(things));
     setScore(0);
@@ -154,6 +153,7 @@ export default function Quiz() {
             answer={answer}
             setAnswer={setAnswer}
             score={score}
+            languageTo = {questions[number].languageTo}
           />
           {number < TOTAL_QUESTIONS - 1 && (
             <button className="control" onClick={nextQuestion}>

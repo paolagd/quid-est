@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { updateWordDifficulty } from "../../utils/firebase";
-import { difficultyStyle , languageIcons} from "../../helpers/dictionary";
+import { difficultyStyle, languageIcons} from "../../helpers/dictionary";
 import "./DictionaryEntry.css";
 
 function DictionaryEntry(props) {
