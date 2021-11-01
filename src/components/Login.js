@@ -16,9 +16,9 @@ function Login() {
     setPassword("");
   };
 
-  const googleLogin = () => {
-    loginWithGoogle();
-  };
+  // const googleLogin = () => {
+  //   loginWithGoogle();
+  // };
 
   useEffect(() => {
     if (loading) return;
